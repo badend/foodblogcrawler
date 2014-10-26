@@ -88,7 +88,7 @@ object Actors extends App{
 
     val jsoup = Jsoup.parse(str)
 
-    val links = jsoup.select("a[class^=_mouseover _mouseout _toggle _eachClick _updateTopPostViewCount _param]")
+    val links = jsoup.select("/h5")
 
     import scala.collection.JavaConversions._
     val hrefs = for(link <- links) yield {

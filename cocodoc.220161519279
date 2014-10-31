@@ -1,0 +1,910 @@
+
+
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+
+
+
+
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+
+<meta name="robots" content="index,follow"/>
+
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?1">
+
+<link rel="apple-touch-icon-precomposed" href="/mobileweb_icon_96.png" />
+
+<link rel="stylesheet" type="text/css" href="http://t.static.blog.naver.net/nmobile/versioning/style2014_w-174572.css" charset="UTF-8" />
+<style>
+	div.spi_unity {
+		width:291px;
+	}
+</style>
+
+
+	
+		
+	
+	
+
+
+<meta class="_og_tag _title" property="og:title"
+	content="표고버섯이 제철입니다..천연조미료 표고버섯가루 만들어 보세요.^^    [제철음식,천연조미료만드는법,꼬꼬네사랑폐백]" />
+<meta class="_og_tag _description" property="og:description"
+	content="표고버섯이 제철이예요.  가격이 참 착해서 어제 농수산시장에서 2박스 업어 왔어요.4kg 한박스에 23,000원!kg당 6천원이라니 꽤 착하죠.얼마전에는 kg당 만원이라더군요~^^..." />
+<meta class="_og_tag _url" property="og:url"
+	content='http://blog.naver.com/cocodoc/220161519279' />
+<meta class="_og_tag _image" property="og:image"
+	content="http://blogthumb2.naver.net/20141025_35/cocodoc_1414230407150hEAMO_JPEG/20141025_120749.jpg" />
+<meta class="_og_tag _author" property="og:article:author"
+	content="네이버 블로그 | 꼬꼬네 맛있는 이야기~♬♪       [꼬꼬네 사랑폐백]" />
+<meta property="og:type" content="website" />
+<meta property="me:feed:serviceId" content="blog" />
+<meta name="format-detection" content="telephone=no" />
+
+
+
+<script type="text/javascript" src="http://t.static.blog.naver.net/nmobile/versioning/CommonJS-1841525.js" charset="UTF-8"></script>
+<script type="text/javascript">
+jindo.m.patch("1.12.0").add({
+    "useTimingFunction" : function() {
+        var htOsInfo = jindo.m.getOsInfo();
+        if (htOsInfo.ios && parseInt(htOsInfo.version, 10) >= 6) {
+            return -1;
+        }
+    }
+});
+/* flicking 개선 start*/
+/* var fOldFlickTouchStartImpl = jindo.m.Flick.prototype._startImpl;
+var fOldSlideFlickMoveAfterCall = jindo.m.SlideFlicking.prototype._moveAfterCall;
+var fOldFlickTouchEndImpl = jindo.m.Flick.prototype._endImpl;
+var bTouchMoved = false;
+
+jindo.m.Flick.prototype._startImpl = function(we){
+	this.nStartX = we.nX;
+	bTouchMoved = false;
+	fOldFlickTouchStartImpl.apply(this, [we]);
+}
+
+jindo.m.SlideFlicking.prototype._moveAfterCall = function(we){
+	 if(Math.abs(this.nStartX  - we.nX) < this.getSensitivity() && !bTouchMoved){
+		return;
+	}; 
+	bTouchMoved = true;
+	fOldSlideFlickMoveAfterCall.apply(this, [we]);
+}
+
+jindo.m.Flick.prototype._endImpl = function(we){
+	bTouchMoved = false;
+	fOldFlickTouchEndImpl.apply(this, [we]);
+}
+
+jindo.m.Flick.prototype.setSensitivity = function(nFlickingSensitivity){
+	this.nFlickingSensitivity =  nFlickingSensitivity;
+}
+
+jindo.m.Flick.prototype.getSensitivity = function(){
+	return this.nFlickingSensitivity;
+} */
+
+/* flicking 개선 end*/
+$Event.prototype.getEventElement = function(sTargetTagName, sTargetClassName, nMaxDepth) {
+	var el = this.element;
+	var wel = $Element(this.element);
+
+	var sTagName = 'a|button';
+	var sClassName = null;
+	
+	var nDepth = typeof nMaxDepth == 'undefined' ? 5 : nMaxDepth;
+	
+	if (typeof el.tagName == "undefined") return wel;
+	if (typeof sTargetTagName != "undefined") sTagName = sTargetTagName;
+	if (typeof sTargetClassName != "undefined") sClassName = sTargetClassName;
+	
+	var oTagNameRegex = new RegExp("^(" + sTagName + ")$", "i");
+	if (oTagNameRegex.test(el.tagName) && (sClassName == null || wel.hasClass(sClassName))) {
+		return wel;
+	} else {
+		var welParents = wel.parent(function(v) {
+			if (v.$value().nodeType != 1) {
+				return false;
+			}
+			
+			if (sTargetClassName) {
+				return oTagNameRegex.test(v.$value().tagName) && v.hasClass(sClassName);
+			}
+			
+			return oTagNameRegex.test(v.$value().tagName);
+		}, nDepth);
+		
+		return welParents != null && welParents.length > 0 ? welParents[0] : wel;
+	}
+}
+
+
+var doc = document.documentElement;
+doc.setAttribute('data-useragent',navigator.userAgent);
+
+var blogOwner = false;
+var rightClickOpenYn = true;
+var lcs_SerName = "lcs.naver.com";
+var isJeagleDebug = false;
+
+window.onerror = jeagleEyeUtil.nvl_error;
+
+/* window.onerror = function(msg, url, line) {
+   alert("Error: " + msg + "\nurl: " + url + "\nline #: " + line);
+}; */
+</script>
+<title>표고버섯이 제철입니다..천연조미료 표고버섯가루 만들어 보세요.^^    [제철음식,천연조미료만드는법,꼬꼬네사랑폐백] : 네이버 블로그</title>
+
+<script language="javascript" src="http://serviceapi.nmv.naver.com/resources/lang/js/ugcvideoplayer-1.0.js"></script>
+<script type="text/javascript">
+
+window.onerror = function() {
+	loadImgAndVideo();
+}
+function loadImgAndVideo() {
+	var oImgAndVideoHandler;
+	if (document.readyState == "complete") {
+		
+		oImgAndVideoHandler = new ImgAndVideoHandler(function(){});
+		oImgAndVideoHandler.loadOnError();
+	} else {
+		window.onload = function() {
+			oImgAndVideoHandler = new ImgAndVideoHandler(function(){});
+			oImgAndVideoHandler.loadOnError();
+		}
+	}
+}
+</script>
+</head>
+<body id="body" class="tablet_end">
+
+    
+    
+	<div id="quick_menu" class="quick_menu">
+		<h1 class="logo">
+			<a href="http://m.naver.com" class="naver" onclick="var t = nsc; nsc='Mblog.home'; nclk(this, 'qmn.naver', '', ''); nsc=t"><span class="sim">NAVER</span></a>
+			<a class="blog"><span class="sim">블로그</span></a>
+        </h1>
+		<ul>
+			
+			<li>
+				
+				
+				
+				
+				
+				<a href="#" class="btn_menu btn_bloghome _btn_menu _param(/Index.nhn) _returnFalse" onclick="var t = nsc; nsc='Mblog.home'; nclk(this, 'qmn.home', '', ''); nsc=t" >
+					<span class="ico"><span class="sim"></span></span>
+					<span class="txt">블로그홈</span>
+				</a>
+			</li>
+			
+			<li>
+				
+				
+				
+				
+				
+				<a href="#" class="btn_menu btn_buddyset _btn_menu _param(/GoMyBuddyList.nhn) _returnFalse" onclick="var t = nsc; nsc='Mblog.home'; nclk(this, 'qmn.ngr', '', ''); nsc=t" >
+					<span class="ico"><span class="sim"></span></span>
+					<span class="txt">이웃관리</span>
+				</a>
+			</li>
+			
+			<li>
+				
+				
+				
+				
+				
+				<a href="#" class="btn_menu btn_write _btn_menu _param(/GoWriteForm.nhn) _returnFalse" onclick="var t = nsc; nsc='Mblog.home'; nclk(this, 'qmn.write', '', ''); nsc=t" >
+					<span class="ico"><span class="sim"></span></span>
+					<span class="txt">글쓰기</span>
+				</a>
+			</li>
+			
+				<li class="myblog">
+					
+						
+						
+											
+					<a class="btn_myblog btn_menu _btn_menu  _param(/GoMylog.nhn) _returnFalse"  onclick="var t = nsc; nsc='Mblog.home'; nclk(this, 'qmn.any', '', ''); nsc=t" href="#">
+					<span class="ico">
+					
+					<span class="sim"></span></span>
+					<span class="txt">내블로그</span>
+					</a>
+					
+						
+						
+							<a href="#" class="name btn_myblog btn_menu _btn_menu  _param(/GoMylog.nhn) _returnFalse"><span class="ell">내블로그</span></a>
+							<span class="num">로그인 하세요</span>
+						
+					
+				</li>
+			</ul>
+			<a class="btn_close _btn_close_qmenu" onclick="var t = nsc; nsc='Mblog.home'; nclk(this, 'qmn.close', '', ''); nsc=t"><span class="sim">퀵메뉴 닫기</span></a>
+			<span class="bg_thumb" style=""></span> 
+	</div>
+<script type="text/javascript">
+var bLoginUser = false;
+var gsUserblogId="";
+var gsLocationOrigin = "http://m.blog.naver.com";
+var loginCurrentFullUrl ="";
+var logoutCurrentFullUrl = "";
+var gbQuickMenuOpen = false;
+
+var CommonQuickMenuLayerController = $Class({
+	$init : function(){
+	},
+	
+	start : function(){
+		this.paramUtil = new ParamUtil();
+		this._setEvent();
+		this._getTodayVisit();
+		
+	},
+	
+	_setEvent : function(){
+		$Fn(this._doClick, this).attach($$('.btn_menu'), "click");
+		$Fn(this._doClick, this).attach($$('._btn_close_qmenu'), "click");
+	},
+	
+	_doClick : function(oEvent){
+		var wel = oEvent.getEventElement();
+		
+		if (wel.hasClass("_btn_menu")) {
+			this._goRedirectUrl(paramUtil.getParam(wel.className()));	
+		} else if (wel.hasClass("_btn_close_qmenu")) {
+			gbQuickMenuOpen = false;
+			$Element("btn_q").removeClass("on");
+			$Element($$.getSingle("._header")).removeClass("on");
+			$Element("ct").removeClass("on");
+			$Element("quick_menu").removeClass("on");
+			$Element("body").removeClass("on");
+			var welFooter = $Element($$.getSingle("._commonFooter"));
+			if (welFooter) {
+				welFooter.removeClass("on");
+			}
+			// 개별블로그 메인에만 cover가 존재함
+			if ($Element("cover")) {
+				$Element("cover").removeClass("on");
+			}
+		}
+		
+		if (wel.hasClass('_returnFalse')) {
+	    	oEvent.stop();
+	    }
+	},
+	
+	_getTodayVisit : function() {
+		if (gsUserblogId == "") {
+			return;
+		} 
+		
+		if (window.innerWidth < 786 && window.innerHeight < 786) {
+			return;
+		}
+		
+		var param = {'blogId' : gsUserblogId};
+		var oAjax = $Ajax("/QuickMenuAsync.nhn", {
+			onload: $Fn(function(o){
+				var oResponse = $Json(o.json()).toObject();
+				if (oResponse.result) {
+					$("todayVisit").innerHTML = "Today " + oResponse.result.visitCount;
+					return;
+				}
+				
+			}, this).bind()
+		});
+		oAjax.request(param);
+	},
+	
+	_goRedirectUrl : function(params){
+		if(params.length){
+			if(params[0] !== "/Index.nhn" && !bLoginUser ){
+				loginCurrentFullUrl = gsLocationOrigin + params[0];
+				loginUtil.login();
+				return;
+			}
+			location.href=params[0];
+		}
+	}
+	
+});
+
+var commonQuickMenuLayerController = new CommonQuickMenuLayerController();
+commonQuickMenuLayerController.start();
+</script>
+<header role="banner">
+<div class="header _header" id="_view_header" style="z-index:3000;">
+	<div class="header_t1" id="_header_btn">
+		<a id="btn_q" class="btn_q _returnFalse" onclick="nclk(this, 'pgn.qmenu', '', '');" >
+			<span class="sim">퀵메뉴 열고 닫기</span>
+			
+		</a>
+		<h2 class="tit_h2 _cur_category">
+			<a id="_categoryName" class="header_tit _cur_category _returnFalse" onclick="nclk(this, 'pgn.blogname', '', '');">
+				<span id="_header_categoryName" class="ell">꼬꼬네 맛있는 이야기~♬♪       [꼬꼬네 사랑폐백]</span>
+				<span class="sim">카테고리 레이어 열고 닫기</span>
+			</a>
+		</h2>
+		<div class="header_btn">
+			<a href="/PostSearchList.nhn?blogId=cocodoc" class="btn_srch" onclick="nclk(this, 'pgn.search', '', '');"><span class="sim">검색</span></a>
+		</div>
+	</div>
+	<div id="_div_categorylist" class="lyr_t1">
+		<div id="_postview_loading" style="position:absolute; text-align:center; top:115px; width:100%; z-index:3000;"><span class="img_loading sim">로딩중</span></div>
+		<div id="_categorylist_dimmed" class="dimmed"></div>
+		<div id="_scroll_area" class="lst_w">
+			<div style="width:100%">
+				<ul id="_ul_categorylist" class="lst_t4"></ul>
+			</div>
+		</div>
+		<span id="gra" class="gra"></span>
+	</div>
+</div>
+</header>
+
+<div id="post_share" style="position:absolute;top:50px;display:none;z-index:2000;right:15px">
+	<div id="spiLayer"></div>
+</div>
+
+
+<div id="_post_area" class="ct_wrap">
+	<div id="ct" class="end" role="main">
+		<div id="mflick" class="mflick">
+		    <div class="flick-container">
+		        <div class="flick-ct" >
+		        </div>
+		        <div class="flick-ct" >
+		            
+					
+
+
+
+<div id="_post_property" style="display:none"
+commentCount="7"
+blockType="0"		
+isBlacklistUser="false"	
+blogName="꼬꼬네 맛있는 이야기~♬♪       [꼬꼬네 사랑폐백]"
+commentEnable="true"
+categoryNo="14"
+logType="0"
+addDate="1414230879920"
+hasNaverMap="false"
+gdid="90000003_000000000000003342A62EAF"
+browserTitle="표고버섯이 제철입니다..천연조미료 표고버섯가루 만들어 보세요.^^    [제철음식,천연조미료만드는법,꼬꼬네사랑폐백] : 네이버 블로그"
+></div>
+<div class="_postView">
+	<!-- 폰트 사이즈 셋팅 -->
+	
+	
+		
+		
+		
+		
+		
+		
+	
+
+	
+	<div class="post_tit_area">
+		
+		<strong class="tit_category"><a href="/PostList.nhn?blogId=cocodoc&categoryNo=14&logCode=0&categoryName=%EB%82%98%EC%9D%98+%EC%9B%B0%EB%B9%99%EB%B0%A5%EC%83%81" onclick="nclk(this, 'pst.board', '', '');" class="_categoryName">나의 웰빙밥상</a></strong>
+		
+			
+			
+			
+			
+		
+		
+		
+		<div class="tit_area ">
+			<h3 class="tit_h3">표고버섯이 제철입니다..천연조미료 표고버섯가루 만들어 보세요.^^    [제철음식,천연조미료만드는법,꼬꼬네사랑폐백]  
+				
+			</h3>
+			<a  class="btn_reply _comment_count" id="_comment_count" onclick="nclk(this, 'pst.repn', '', '');" ><span class="blind">덧글</span><span class="_show_comment_count">7</span><span class="sim"></span></a>
+		</div>
+		<div class="dsc">
+			<span class="txt"><a href="/PostList.nhn?blogId=cocodoc" onclick="nclk(this, 'pst.writer', '', '');">꼬꼬</a>
+			    
+					
+						 
+						 
+						
+							
+							
+							
+						
+					
+					
+						<a href="#" class=" btn_buddyadd _add_buddy _param(cocodoc|false||/BuddyAddForm.nhn) _returnFalse" isBackUser="false" onclick="nclk(this, 'pst.add', '', '');" ><span class="sim">이웃추가</span></a>
+					 <!-- 주인이 아니면  -->
+				
+			</span> <span class="bar">|</span> <em class="num">2014.10.25 18:54</em>
+		</div>
+		<div class="dsc2">
+			<a class="btn_app _app_ad_btn _param(postView|220161519279|cocodoc) _returnFalse" onclick="nclk(this, 'pst.aview', '', '');"><span class="ico_blogapp sim"></span> 앱으로 보기 <span class="bu_arr sim"></span></a>
+			
+			<!-- 본문 기타 기능 -->
+				<div class="post_function_t1">
+					<button type="button" class="btn_function _btn_tools" onclick="nclk(this, 'pst.func', '', '');"><span class="sim">본문 기타 기능</span></button>
+					<div class="lyr_post_function" id="_tools_layer" style="display:none">
+						<ul>
+							<li class="font_size">
+								<strong class="blind">본문 폰트 크기 조정</strong>
+								<button type="button" class="btn_font_s _smallFont " id="moreSmall" onclick="nclk(this, 'pst.ftxts', '', '');"><span class="sim">본문 폰트 크기 작게 보기</span></button>
+								<button type="button" class="btn_font_b _bigFont " id="moreBig" onclick="nclk(this, 'pst.ftxtl', '', '');"><span class="sim">본문 폰트 크기 크게 보기</span></button>
+								<span class="size " id="font_size">가</span>
+							</li>
+						
+							<li><a href="#" class="_btn_sympathy _func_sympathy  _returnFalse">공감하기 <span class="sympathy sim "></span></a></li>
+						
+							<li><a href="#" class="_post_share spi_sns_share _topShareButton _returnFalse" id="spiButton" onclick="nclk(this, 'pst.fshare', '', '');" >공유하기 <span class="share sim"></span></a></li>
+							<li><a href="#" class="_copy_url _returnFalse" onclick="nclk(this, 'pst.furl', '', '');">URL복사 <span class="copy sim"></span></a></li>
+						
+						</ul>
+					</div>
+				</div>
+			<!-- //본문 기타 기능 -->
+		</div>
+	</div>
+	
+
+	
+	<div class="post_ct " id="viewTypeSelector">
+		
+		
+
+		
+
+		
+		
+
+		
+		<div style="font-size:10pt;" _foo="font-size:10pt; font-family:'1003773_10';" _foo="view"> <p style="" _foo="TEXT-ALIGN: center" align="center"><span class="_img _inl fx" thumburl="http://mblogthumb2.phinf.naver.net/20141025_261/cocodoc_1414230405213sewIy_JPEG/IMG_20141025_1.png?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">표고버섯이 제철이예요.&nbsp;<br />&nbsp;<br />가격이 참 착해서 어제 농수산시장에서 2박스 업어 왔어요.<br />4kg 한박스에 23,000원!<br />kg당 6천원이라니 꽤 착하죠.<br />얼마전에는 kg당 만원이라더군요~^^&nbsp;<br />&nbsp;<br />표고가루가 바닥을 보여가니 심~~히 불안하던차에 득템~♥&nbsp;<br />&nbsp;&nbsp;</p><div style="" _foo="TEXT-ALIGN: center" _foo="inp_emoticon _sticonContainer" align="center"><img src="https://story-item.kakaocdn.net/dw/SS01003.emot_002.png?convert=64h" alt="" class="fx" onclick="javascript:location.href='https://story-item.kakaocdn.net/dw/SS01003.emot_002.png?convert=64h';"/><img src="https://story-web-0.kakaocdn.net/web/7171ead/img/space.png" alt="" class="fx" onclick="javascript:location.href='https://story-web-0.kakaocdn.net/web/7171ead/img/space.png';"/></div><p style="" _foo="TEXT-ALIGN: center" align="center"><br />저의 대부분의 음식에 감칠맛을 내주기위해서 넣어주는 표고버섯가루!<br />떨어지면 큰일인데 한시름 놓았어요~^^&nbsp;<br />&nbsp;<br />퇴근할때 싸들고 가서 집 베란다에 던져? 놓아야겠어요.&nbsp;<br />&nbsp;<br />이 표고버섯은 햇볕에서 말려야 비타민D가 풍부해져서 뼈가 튼튼해져요~♥&nbsp;<br />&nbsp;<br />오늘 표고버섯은 기둥이 또 실하고 좋아서 밑반찬 만들어 먹으려고 뜯기 시작했는데~@@<br />아이고, 손톱아파~ㅠㅠ<br />2시간이나 뜯었어요.&nbsp;</p><div style="" _foo="TEXT-ALIGN: center" _foo="inp_emoticon _sticonContainer" align="center"><img src="https://story-item.kakaocdn.net/dw/SS01003.emot_005.png?convert=64h" alt="" class="fx" onclick="javascript:location.href='https://story-item.kakaocdn.net/dw/SS01003.emot_005.png?convert=64h';"/><img src="https://story-web-0.kakaocdn.net/web/7171ead/img/space.png" alt="" class="fx" onclick="javascript:location.href='https://story-web-0.kakaocdn.net/web/7171ead/img/space.png';"/></div><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;<br />&nbsp;<br />저거 하실거면 손톱 자르지마세요~^^<br />그래도 다 해 놓으니 든든하네요.<br />꼭 닭고기 같아요.<br />먹어보니 향도 좋고 달군요~♥&nbsp;<br />&nbsp;<br />암튼!<br />바쁜 시간중에도 요렇게 요긴한 시간이 생겨 밑준비 해 놓을수 있어서 다행이고 감사하네요.&nbsp;<br />&nbsp;<br />잠시쉬고 또 음식준비, 수업준비~^^&nbsp;<br />&nbsp;<br />마지막으로!<br />우리의 엄마들, 할머니들..<br />존경합니다.<br />자식들 주실려고 늘 꼼지락거리시니 &nbsp;손톱이며 온몸이 얼마나 고단하실까~<br />오늘 표고버섯 기둥을 뜯다가 엄마 생각이 납니다~♥&nbsp;<br />&nbsp;<br />&nbsp;</p><div style="" _foo="TEXT-ALIGN: center" _foo="inp_emoticon _sticonContainer" align="center"><img src="https://story-item.kakaocdn.net/dw/SS01001.emot_024.png?convert=64h" alt="" class="fx" onclick="javascript:location.href='https://story-item.kakaocdn.net/dw/SS01001.emot_024.png?convert=64h';"/><img src="https://story-web-0.kakaocdn.net/web/7171ead/img/space.png" alt="" class="fx" onclick="javascript:location.href='https://story-web-0.kakaocdn.net/web/7171ead/img/space.png';"/></div><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb1.phinf.naver.net/20141025_296/cocodoc_1414230405807KPUJR_JPEG/20141024_213229.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center"><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_190/cocodoc_1414230406248KRNRc_JPEG/20141024_213158.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center"><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_206/cocodoc_1414230406644TH2iS_JPEG/20141025_123655.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">표고버섯의 상태도 좋고 실해보여서 얼른 차에 실어 왔어요.^^</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb4.phinf.naver.net/20141025_35/cocodoc_1414230407150hEAMO_JPEG/20141025_120749.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">단단하고 잘 자랐어요.</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">표고버섯은 워낙 활용도가 높지만...</p><p style="" _foo="TEXT-ALIGN: center" align="center">우리가족들은 생표고는 별로 좋아하질 않아요.</p><p style="" _foo="TEXT-ALIGN: center" align="center">그런데 음식에&nbsp;가루로 넣어서 주면 '쥐도 새도 모르게~^^' 먹고 있는거지요.^^</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_130/cocodoc_1414230407609JOpXj_JPEG/20141025_120820.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">기둥은 뜯어내면 잘 뜯어져요.</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb4.phinf.naver.net/20141025_299/cocodoc_14142304109769dR9T_JPEG/20141025_120831.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">이제 시작!</p><p style="" _foo="TEXT-ALIGN: center" align="center">2박스를 다~ 했을때는 양이 꽤나 많더군요.ㅠㅠ;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_30/cocodoc_1414230411467WrLJ6_JPEG/20141025_120815.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">기둥들이 길이가 좋아요.</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_74/cocodoc_1414230414303bOTRo_JPEG/20141025_134724.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center"><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_294/cocodoc_1414230414710JEuR7_JPEG/20141025_134744.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">요렇게 닭고기처럼 잘 뜯어져요.</p><p style="" _foo="TEXT-ALIGN: center" align="center">손톱이 까매졌어요.ㅋㅋ</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_170/cocodoc_1414230417574PeKSC_JPEG/20141025_134806.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">꼭 닭가슴살 찢어 놓은것 같지요??</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb3.phinf.naver.net/20141025_26/cocodoc_1414230418269NklMD_JPEG/20141025_153129.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">드디어 끝!</p><p style="" _foo="TEXT-ALIGN: center" align="center">아이고 힘들어라~~@@</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><br style="" _foo="CLEAR: both" /><br style="" _foo="CLEAR: both" /><span class="_img _inl fx" thumburl="http://mblogthumb2.phinf.naver.net/20141025_137/cocodoc_1414230418833ypuan_JPEG/20141025_153147.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">요거만 하는데 2시간은 넘게 찢었어요.</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">이젠 잘 마르기만 하면 되겠어요.</p><p style="" _foo="TEXT-ALIGN: center" align="center">얼른 말라라 가루로 만들어 줄테니...^^</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center"><span class="_img _inl fx" thumburl="http://mblogthumb1.phinf.naver.net/20141025_204/cocodoc_14142307779641pAba_JPEG/BBE7C1F81004_7475.jpg?type="></span></p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p style="" _foo="TEXT-ALIGN: center" align="center">잘 마르면 요렇게 분쇄기에 갈아서 찌개, 국, 탕, 볶음, 나물 등등에 조미료로 사용하시면 됩니다.</p><p style="" _foo="TEXT-ALIGN: center" align="center">감칠맛이 풍부해서 최고의 천연조미료예요.^^</p><p style="" _foo="TEXT-ALIGN: center" align="center">&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+	</div>
+
+	
+	<dl class="past_tag " style="display:none">
+	<dt>태그</dt>
+	<dd>일상&middot;생각,요리&middot;레시피,표고버섯이제철입니다..천연조미료표고버섯가루만들어보세요.^^[제철음식,천연조미료만드는법,꼬꼬네사랑폐백]</dd>
+	</dl>
+	
+
+	
+	
+	
+	<div class="post_writer">
+		<span class="thumb"><a href="/cocodoc" onclick="nclk(this, 'pst.owner', '', '');"><span class="img"><img src="http://blogpfthumb.phinf.naver.net/20140418_185/cocodoc_1397808084986WJ44V_JPEG/20140208_230032.jpg?type=s1" width="43" height="43" alt="섬네일"></span></a></span>
+		<span class="txt">
+		<strong class="writer"><a href="/cocodoc" onclick="nclk(this, 'pst.owner', '', '');">꼬꼬</a></strong>
+
+		
+			
+			 
+			 
+			<a href="#" class="btn_buddy add _add_buddy _param(cocodoc|false||/BuddyAddForm.nhn) _returnFalse" isBlackUser="false" onclick="nclk(this, 'pst.wadd', '', '');"><span class="sim"></span> 이웃<span class="blind">추가</span></a>
+		
+			<span class="dsc">
+ 				
+ 					
+ 					
+ 						꼬꼬네 맛있는 이야기~♬♪       [꼬꼬네 사랑폐백]
+ 					
+ 				
+ 			</span>
+		</span>
+		
+
+
+
+
+	</div>
+	
+	
+	  <div class="section_t1">
+	     
+	     <a href="/CommentList.nhn?blogId=cocodoc&logNo=220161519279" class="btn_reply" onclick="nclk(this, 'pst.ren', '', '');">
+	        <span class="ico"><span class="sim"></span>
+	        	
+	        </span>덧글 <em>7</em>
+	     </a>
+	     
+		
+		     <a href="#" class="btn_sympathy1 _btn_sympathy _returnFalse "><span class="ico"><span class="sim"></span></span></a>
+	    	 <a href="/SympathyHistoryList.nhn?blogId=cocodoc&logNo=220161519279" onclick="nclk(this, 'pst.liken', '', '');" class="btn_sympathy2">공감 <em id="sympathyCount">9</em></a>
+		
+		<a class="btn_share _post_share spi_sns_share" id="spiButton" onclick="nclk(this, 'pst.share', '', '');" ><span class="sim">공유</span></a>
+	</div>
+	
+	<div class="aside">
+		
+		<div class="lst_t2">
+			<h2 class="tit_h2">
+				<span class="txt">
+					<a href="/PostList.nhn?blogId=cocodoc&categoryNo=14&logCode=0&categoryName=%EB%82%98%EC%9D%98+%EC%9B%B0%EB%B9%99%EB%B0%A5%EC%83%81" onclick="nclk(this, 'pst.otherlist', '', '');"><strong class="ell">나의 웰빙밥상</strong></a>
+				</span>
+				<span class="txt2">의 다른 글</span>
+			</h2>
+			
+			<div class="cflick">
+			    
+			    <div class="cflick-container">
+			        
+			        <div class="cflick-ct" >
+			        <ul class="_category_post_list">
+						</ul>
+			        </div>
+			        <div class="cflick-ct">
+						<ul class="_category_post_list">
+						</ul>
+			        </div>
+			        <div class="cflick-ct">
+			        <ul class="_category_post_list">
+						</ul>
+			        </div>
+			    </div>
+			</div>
+
+			<div class="paging_t1" id=_pagingBtn>
+				<a href="#" class="prev sim _prev_category_post _returnFalse" onclick="nclk(this, 'pst.prev', '', '');" style='display:none'>이전</a><span class="prev sim">이전</span>
+				<a href="#" class="next sim _next_category_post _returnFalse" onclick="nclk(this, 'pst.next', '', '');" style='display:none'>다음</a><span class="next sim">다음</span>
+			</div>
+		</div>
+		
+	</div>
+	
+	
+		
+			<div class="end_pl _adPost">
+				<h3 class="pl_h">
+					<span class="blind">파워링크</span>
+					<em class="ads">Ads by NAVER</em>
+				</h3>
+				<ul>
+				
+				<li class="lk">
+					<p class="tit">
+						<a href="http://adcr.naver.com/adcr?x=na0y0XdsvOyEphbhKkIdof///w==bX5V+idxRyhad2uBgWCAZFZgL1Q7cEwmqKos8vIDaHXveOxR93d3mdxbLyrlVi38nOrSl8kC+CuwkeDjmoVFwIoUv4s0vXhg/23/s/PNXjgeYEc9AG/fVUGEIMwH3qFaCNqWiD23Nsaqqriyo/F7QdcptgaT/qZyQnqQdHQZovUf653x29zAnw44pPNRQSUw6S9Oyh7JAblDO8El3/KjtEZerNKikG+PNWzFh5wxb33ENsNs5/FynbWb0KOTJEZtm2KzTD6sxuS3Rk2613UdULma3uRxfPG3BlNbeiTajxti6DSyKoaH8WZDZLeE3gF4YtDhRiBl3NAaFHgxFi5YdlkCun7+jHnXzsHcIEYd2tReWjf/vvkSofN3obTZA3W2HhA2YVdm9Of9JQ0w3neBW6uRitd/S21vE4zRFQ1bELE7yItu2+3fEbQ53z2cIvgnFyUGcTJ0svj42a+lrCm1YCnj/Jtl3CClGbe/802xX8OBxjlL2IbEEC60q72jv9+y2bBKLy3+UTAmkR8k3rx2V+88B3eSGvRWFS1v4AyffSxcFofD/b+Hsk2mDfqm4pGiG36f5FfDhmZKSNe1RcqPh//ibwCvi8KsM7louBn+UGtWwtNwAjRGiLI5Kftm5/gEgvEfjmJkppOiHBPeBwG9EMuYX+pUX6xbgr1nmw1mv8w/ZoNDEUxYJVBIEi515JXkpn3elMbhN6whnTTwZwm+OVw==">웰빙 표고버섯 이왕상사</a>
+						
+						
+						
+					</p>
+					<p class="cnt">42년 역사의 농산물 전문업체, 표고버섯, 송이, 대추, 견과류, 선물세트 전문</p>
+					<p class="ctt">
+						
+						<a href="http://adcr.naver.com/adcr?x=na0y0XdsvOyEphbhKkIdof///w==bX5V+idxRyhad2uBgWCAZFZgL1Q7cEwmqKos8vIDaHXveOxR93d3mdxbLyrlVi38nOrSl8kC+CuwkeDjmoVFwIoUv4s0vXhg/23/s/PNXjgeYEc9AG/fVUGEIMwH3qFaCNqWiD23Nsaqqriyo/F7QdcptgaT/qZyQnqQdHQZovUf653x29zAnw44pPNRQSUw6S9Oyh7JAblDO8El3/KjtEZerNKikG+PNWzFh5wxb33ENsNs5/FynbWb0KOTJEZtm2KzTD6sxuS3Rk2613UdULma3uRxfPG3BlNbeiTajxti6DSyKoaH8WZDZLeE3gF4YtDhRiBl3NAaFHgxFi5YdlkCun7+jHnXzsHcIEYd2tReWjf/vvkSofN3obTZA3W2HhA2YVdm9Of9JQ0w3neBW6uRitd/S21vE4zRFQ1bELE7yItu2+3fEbQ53z2cIvgnFyUGcTJ0svj42a+lrCm1YCnj/Jtl3CClGbe/802xX8OBxjlL2IbEEC60q72jv9+y2bBKLy3+UTAmkR8k3rx2V+88B3eSGvRWFS1v4AyffSxcFofD/b+Hsk2mDfqm4pGiG36f5FfDhmZKSNe1RcqPh//ibwCvi8KsM7louBn+UGtWwtNwAjRGiLI5Kftm5/gEgvEfjmJkppOiHBPeBwG9EMuYX+pUX6xbgr1nmw1mv8w/ZoNDEUxYJVBIEi515JXkpn3elMbhN6whnTTwZwm+OVw==" class="blog">http://www.yiwang.co.kr</a>
+					</p>
+				</li>
+				
+				<li class="lk">
+					<p class="tit">
+						<a href="http://adcr.naver.com/adcr?x=YM3R+n23T1CI0vKeGGMUA////w==bUTPUtyXg6Id9m5E6whJxumf9xTcmP/q0VUkt6cKU6t+MQyQxtK2jCN2qYDkipC9xUrKcrrocRZNGbXWkNm+L2lEsJTqhrnOzG+k5wlWU3/rlWLvdbgpRXAgXGJn3R5ObZehTTDmyiz1Fq51ylEmZbN9/KF2ziQ8CgugAAUHeKZwcXY6eGl5jw0qFlD6NSRYc6Fff5Nv/Si9BXnbJ+V2hVOjBw84YfQSUYt5RDUnohldMlkay6jLFKYebemx7ys/PvJCQzZ4yFDKimgXS0ib3GbfBETEd9iUyZ9rBabntXCAPEvY0+gu3HKMvtmXmAmW1GHaRLgAtQQLR6cOVPofRHQ3cLjGCFksx9YImsJrtZ5wxVqHVWU6CHDKSgh1G8ckhXF9LDkmcRzyZ0h5H/mI5N6FKnq0ANDSd/J1pyNH6ennAjGvXUqc0/+0J7X+pVUz25Q4iKGCu5s6NIbYtCE5TipWc1sqmLDbfkrpRE1OHsKMs9hoOaJO9wiGDhw6Z7Z0bTzCJj/pW6jOD5IwF1CvKdzr7aO0bNMkx6JRtit4YC90DO0RH/d38AVfZ94C8hR876MMPgYzk3rdQmYN7fzd2XRFrKg1H4YdvUzD1r/sdSsOueBok4WLRl5XD1apdC2rK2m+vOFkvKCpul0nTaprXfuMtbxfa1F7aiyd5hNRlMGKvolt2NSJM/g/9QEY1UJhafbLAO441mrnDTvBx9lvzkRGkasoPV8PXQdvx1t+PpW5f7EQj7v57OueIMYxgrAvvQT2lEddBpcdZamTxY5WNRdLqE9YeNrhbG23kiiBkWVx1qGyevydbhk3T3+0btJQYF1poYFBHexudVrRk4W3EJa/EqGZkDt643BdJsrVT4Bg=">CJ몰 표고버섯</a>
+						<em class="mb">모바일 지원</em>
+						
+						
+					</p>
+					<p class="cnt">표고버섯, CJ인기상품 특가, 제품별 추가할인쿠폰, 모바일 5%추가적립.</p>
+					<p class="ctt">
+						
+						<a href="http://adcr.naver.com/adcr?x=YM3R+n23T1CI0vKeGGMUA////w==bUTPUtyXg6Id9m5E6whJxumf9xTcmP/q0VUkt6cKU6t+MQyQxtK2jCN2qYDkipC9xUrKcrrocRZNGbXWkNm+L2lEsJTqhrnOzG+k5wlWU3/rlWLvdbgpRXAgXGJn3R5ObZehTTDmyiz1Fq51ylEmZbN9/KF2ziQ8CgugAAUHeKZwcXY6eGl5jw0qFlD6NSRYc6Fff5Nv/Si9BXnbJ+V2hVOjBw84YfQSUYt5RDUnohldMlkay6jLFKYebemx7ys/PvJCQzZ4yFDKimgXS0ib3GbfBETEd9iUyZ9rBabntXCAPEvY0+gu3HKMvtmXmAmW1GHaRLgAtQQLR6cOVPofRHQ3cLjGCFksx9YImsJrtZ5wxVqHVWU6CHDKSgh1G8ckhXF9LDkmcRzyZ0h5H/mI5N6FKnq0ANDSd/J1pyNH6ennAjGvXUqc0/+0J7X+pVUz25Q4iKGCu5s6NIbYtCE5TipWc1sqmLDbfkrpRE1OHsKMs9hoOaJO9wiGDhw6Z7Z0bTzCJj/pW6jOD5IwF1CvKdzr7aO0bNMkx6JRtit4YC90DO0RH/d38AVfZ94C8hR876MMPgYzk3rdQmYN7fzd2XRFrKg1H4YdvUzD1r/sdSsOueBok4WLRl5XD1apdC2rK2m+vOFkvKCpul0nTaprXfuMtbxfa1F7aiyd5hNRlMGKvolt2NSJM/g/9QEY1UJhafbLAO441mrnDTvBx9lvzkRGkasoPV8PXQdvx1t+PpW5f7EQj7v57OueIMYxgrAvvQT2lEddBpcdZamTxY5WNRdLqE9YeNrhbG23kiiBkWVx1qGyevydbhk3T3+0btJQYF1poYFBHexudVrRk4W3EJa/EqGZkDt643BdJsrVT4Bg=" class="blog">http://mw.cjmall.com</a>
+					</p>
+				</li>
+				
+				<li class="lk">
+					<p class="tit">
+						<a href="http://adcr.naver.com/adcr?x=WMUiXan8GmF3AgIiVVJCdP///w==by8MWQw/USMjEHiSqE3QnWKvb5J6VZ/HOHY8l4wmMXAH3/jcQ09hUla3o9Xue1g/wYL13e+mOijaC+nkfGG5SZUCDaOK/1IwGX23WlwWeQMTmBNAhjwFI35kch0MO5bGMjrImRTvSgcPh63P+C4N88syezo2cbmhuWLmOTKK59DevQ0K2YM9HJXx3wvCoVWzqq26RNZt70yv4ifPJ++fiimQp3gJzL3zgPS8ZsO7rp3bbFHklr/7NnPv7+xEFm6tTX7YVqQhTUo8EsSgL/LbF2r+zmMfl/9wuzYeK4670BgVr+1y2JmNewgjD127fnd2fujdePWmIHuIVglj6rS/1jRsdlBefrv28malv460hV9Y02l97bxjsu5s5GUYVw5Va49i9Zi7F9E12RlgswtDNqQbC0OyEiCItnnDkuYTViJBz30/lxtIDi2461R/rc3CebMLOYGM4/9gNT0ysO4kOtAuZjGBPfw90n0n5vSbRCF6KQLAAoLiiV7IhUGM+CetQ2uroaO9eAqmg2qU954nwdIZgBgNQtCXyh4DvijgbG6lhn8qzya3AtJonpUpc8VuzN/yic8BrOq/U6xLdALj+DLkEUHoujWUKFuGvMQ4qMv06ubbUzghl8jlWZ/8kkvjb">표고버섯 산남감귤영농조합</a>
+						
+						
+						
+					</p>
+					<p class="cnt">한라산 900m고지 표고, 자연건조, 친환경자연농법, 유기농인증, 참나무숲표고</p>
+					<p class="ctt">
+						
+						<a href="http://adcr.naver.com/adcr?x=WMUiXan8GmF3AgIiVVJCdP///w==by8MWQw/USMjEHiSqE3QnWKvb5J6VZ/HOHY8l4wmMXAH3/jcQ09hUla3o9Xue1g/wYL13e+mOijaC+nkfGG5SZUCDaOK/1IwGX23WlwWeQMTmBNAhjwFI35kch0MO5bGMjrImRTvSgcPh63P+C4N88syezo2cbmhuWLmOTKK59DevQ0K2YM9HJXx3wvCoVWzqq26RNZt70yv4ifPJ++fiimQp3gJzL3zgPS8ZsO7rp3bbFHklr/7NnPv7+xEFm6tTX7YVqQhTUo8EsSgL/LbF2r+zmMfl/9wuzYeK4670BgVr+1y2JmNewgjD127fnd2fujdePWmIHuIVglj6rS/1jRsdlBefrv28malv460hV9Y02l97bxjsu5s5GUYVw5Va49i9Zi7F9E12RlgswtDNqQbC0OyEiCItnnDkuYTViJBz30/lxtIDi2461R/rc3CebMLOYGM4/9gNT0ysO4kOtAuZjGBPfw90n0n5vSbRCF6KQLAAoLiiV7IhUGM+CetQ2uroaO9eAqmg2qU954nwdIZgBgNQtCXyh4DvijgbG6lhn8qzya3AtJonpUpc8VuzN/yic8BrOq/U6xLdALj+DLkEUHoujWUKFuGvMQ4qMv06ubbUzghl8jlWZ/8kkvjb" class="blog">http://sannam.ejeju.net</a>
+					</p>
+				</li>
+				
+				</ul>
+			</div>
+		
+		
+	
+	
+	
+	
+	
+	
+	
+</div>
+<div class="social_plugin_property" style="display:none">{&#034;title&#034;:&#034;표고버섯이 제철입니다..천연조미료 표고버섯가루 만들어 보세요.^^    [제철음식,천연조미료만드는법,꼬꼬네사랑폐백]&#034;,&#034;source&#034;:&#034;http://blog.naver.com/cocodoc/220161519279&#034;,&#034;blogName&#034;:&#034;꼬꼬네 맛있는 이야기~♬♪       [꼬꼬네 사랑폐백]&#034;,&#034;blogId&#034;:&#034;cocodoc&#034;,&#034;logNo&#034;:220161519279,&#034;meDisplay&#034;:true,&#034;lineDisplay&#034;:true,&#034;outsideDisplay&#034;:true,&#034;cafeDisplay&#034;:true,&#034;blogDisplay&#034;:true}</div>
+
+		        </div>
+		        <div class="flick-ct">
+		        </div>
+		    </div>
+		</div>
+	  	<div id="_loading2" class="loading2" style="display:none">
+			<div class="dimmed"></div>
+			<span class="img_loading2 sim">로딩중</span>
+		</div>
+	</div>
+	<div id="footer" class="footer _commonFooter">
+		
+		<div id="POST_VIEW_BOTTOM_WEB" class="btm_banner"></div>
+		<div class="btn_top">
+			<a href="javascript:window.scrollTo(0,0)" onclick="nclk(this, 'fot.top', '', '');"><span class="sim">TOP</span></a>
+		</div>
+		
+
+
+<footer role="contentinfo">
+	<div class="footer_btm footer">
+		<div class="btn_top" id="_btn_top" style="display:none;">
+			<a href="#" onclick="nclk(this, 'fot.top', '', '');"><span class="sim" >TOP</span></a>
+		</div>
+		
+		<div class="btn_w">
+			
+			
+				
+					<a href="javascript:loginUtil.login()" class="btn" onclick="nclk(this, 'fot.login', '', '');">로그인</a>
+				
+				
+			
+			<a href="http://m.naver.com/services.html" class="btn" onclick="nclk(this, 'fot.app', '', '');">전체 앱</a>
+			
+		 		
+		 		
+		 		
+		 		
+					
+		  		
+			
+			
+			<a id="_footer_pcUrl" href="http://blog.naver.com/cocodoc/220161519279?viewType=pc" class="btn" onclick="nclk(this, 'fot.gopc', '', '');">PC버전</a>
+			<a href="http://m.naver.com/services.html?f=svc.blog" class="btn btn_v2" onclick="nclk(this, 'fot.sitemap', '', '');">전체서비스</a>
+		</div>
+		<p class="copyright">
+			© <a href="http://www.navercorp.com/" onclick="nclk(this, 'fot.navercorp', '', '');">NAVER Corp.</a> <span class="bar">|</span> <a href="https://m.help.naver.com/support/service/main.nhn?serviceNo=5593" onclick="nclk(this, 'fot.help', '', '');">블로그 고객센터</a> <span class="bar">|</span> <a href="https://m.help.naver.com/support/issue/report.nhn?serviceNo=5593" onclick="nclk(this, 'fot.report', '', '');">오류신고</a>
+		</p>
+	</div>	
+</footer>
+	</div>
+	
+</div>
+<div class="tablet_aside">
+	<div id="_recentPostList"></div>
+	<div id="_loading3" class="loading2" style="display:none">
+		<div class="dimmed"></div>
+		<span class="img_loading2 sim">로딩중</span>
+	</div>
+</div>
+
+
+
+	
+	
+	
+	
+	
+	
+	
+
+
+	<!-- 네이버앱설치유도 -->
+		
+
+
+
+<style type="text/css">
+.lyr_app{box-sizing:border-box;position:fixed;top:0;left:0;right:0;bottom:0;z-index:4000;height:100%;padding:0 28px;text-align:center}
+.lyr_app .dimmed{position:absolute;top:0;left:0;right:0;bottom:0;z-index:4000;width:100%;height:100%;background:#000;opacity:.8}
+.lyr_app:before{display:inline-block;overflow:hidden;width:0;height:100%;margin-left:-5px;vertical-align:middle;content:''}
+.lyr_app .lyr_cont{display:inline-block;position:relative;z-index:5000;width:100%;max-width:424px;max-height:602px;vertical-align:middle;}
+.lyr_app .lyr_cont img{width:100%;vertical-align:top}
+.lyr_app .lyr_cont a{display:block;position:absolute;overflow:hidden;color:transparent;}
+.lyr_app .lyr_cont .link2{left:0;top:70.7%;width:100%;height:14.5%;}
+.lyr_app .lyr_cont .link3{left:0;bottom:0;width:100%;height:14.5%;}
+.lyr_app .lyr_cont .link4{right:0;top:0;width:11.5%;height:8.5%;}
+@media screen and (max-height: 480px) and (orientation: landscape){.lyr_app .lyr_cont{width:180px}}
+</style>
+
+<div class="lyr_app" id="naverAppLyr" style="display:none">
+	<div class="dimmed"></div>
+	<div class="lyr_cont">
+		<a href="http://m.nstore.naver.com/appstore/installApp.nhn?productNo=409102" class="link2" onclick="nclk(this, 'ins.naver', '', '');">네이버 앱스토어에서 설치하기</a>
+		<a href="market://details?id=com.nhn.android.blog" class="link3" onclick="nclk(this, 'ins.google', '', '');">구글플레이에서 설치하기</a>
+		<a href="#" class="link4 _returnFalse" >레이어 닫기</a>
+		<img src="http://static.naver.net/blog/m/lyr_app2.png">
+	</div>
+</div>
+
+<script>
+
+
+$Fn(this.doClick, this).attach($("naverAppLyr"), "click");
+
+function doClick(oEvent) {
+	var el = oEvent.element;
+	var wel = $Element(cssquery.getSingle('!button', el) ? cssquery.getSingle('!button', el) : $Element(cssquery.getSingle('!a', el) ? cssquery.getSingle('!a', el) : el));
+	
+	if (wel.hasClass("link4")) {	
+		if ($("body")) {
+			$("body").setAttribute('style', '');
+		}
+		$Element("naverAppLyr").toggle();
+	} else if (wel.hasClass('_returnFalse')) {
+		event.stop();
+	} 
+}
+
+</script>
+	<!--// 네이버앱설치유도 -->
+
+</body>
+<script type="text/template" id="related_post">
+{for post in posts}
+	<li class="lst_detail_t2 _list_{=post.logNo}">
+		<a href="/PostView.nhn?blogId={=blogId}&logNo={=post.logNo}" onclick="nclk(this, 'pst.other', '', '');">
+			{if post.postImageUrl != null}
+			<span class="thumb"><img src="{=post.postImageUrl}?type=s2" width="58" height="57" alt="섬네일"></span>
+			{/if}
+			<span class="tit"><span class="ell">{=post.title}</span></span>
+			{if post.commentCount != 0}
+			<span class="txt">({=post.commentCount})</span>
+			{/if}
+		</a>
+	</li>
+{/for}
+</script>
+
+<script type="text/javascript">
+var gUrlMap = {
+		'PostViewAsyncTpl' : '/PostViewAsyncTpl.nhn',
+		'BlogPostPrevIndexAsync' : '/BlogPostPrevIndexAsync.nhn',
+		'BlogPostNextIndexAsync' : '/BlogPostNextIndexAsync.nhn',
+		'TotalPostPrevIndexAsync' : '/TotalPostPrevIndexAsync.nhn',
+		'TotalPostNextIndexAsync' : '/TotalPostNextIndexAsync.nhn',
+		'BuddyPostPrevIndexAsync' : '/BuddyPostPrevIndexAsync.nhn',
+		'BuddyPostNextIndexAsync' : '/BuddyPostNextIndexAsync.nhn',
+		'HotTopicPostPrevIndexAsync' : '/HotTopicPostPrevIndexAsync.nhn',
+		'HotTopicPostNextIndexAsync' : '/HotTopicPostNextIndexAsync.nhn',
+		'DirectoryPostPrevIndexAsync' : '/DirectoryPostPrevIndexAsync.nhn',
+		'DirectoryPostNextIndexAsync' : '/DirectoryPostNextIndexAsync.nhn',
+		'PopularPostPrevIndexAsync' : '/PopularPostPrevIndexAsync.nhn',
+		'PopularPostNextIndexAsync' : '/PopularPostNextIndexAsync.nhn',
+		'SectionSearchPostPrevIndexAsync' : '/SectionSearchPostPrevIndexAsync.nhn',
+		'SectionSearchPostNextIndexAsync' : '/SectionSearchPostNextIndexAsync.nhn',
+		'MylogSearchPostPrevIndexAsync' : '/MylogSearchPostPrevIndexAsync.nhn',
+		'MylogSearchPostNextIndexAsync' : '/MylogSearchPostNextIndexAsync.nhn',
+		'NearPostPrevIndexAsync' : '/NearPostPrevIndexAsync.nhn',
+		'NearPostNextIndexAsync' : '/NearPostNextIndexAsync.nhn',
+		'PostCategoryListAsync' : '/PostCategoryListAsyncTpl.nhn',
+		'BlogTagListInfo' : '/BlogTagListInfo.nhn',
+		'SympathyHistoryListAsync' : '/SympathyHistoryListAsync.nhn',
+		'SympathyAddAsync' : '/SympathyAddAsync.nhn',
+		'SympathyDeleteAsync' : '/SympathyDeleteAsync.nhn',
+		'RelatedPostListAsync' : '/RelatedPostListAsync.nhn',
+		'NextRelatedPostListAsync' : '/NextRelatedPostListAsync.nhn',
+		'PrevRelatedPostListAsync' : '/PrevRelatedPostListAsync.nhn',
+		'CommentList' : '/CommentList.nhn',
+		'PostDelete' : '/PostDelete.nhn',
+		'ViewStatAsync' : '/ViewStatAsync.nhn',
+		'Login' : '/Login.nhn',
+		'Logout' : '/Logout.nhn',
+		'MapPinCoordinateInfoAsync' : '/MapPinCoordinateInfoAsync.nhn',
+		'PostView' : '/PostView.nhn',
+		'ScrapToBlog' : '/ScrapToBlog.nhn',
+		'ScrapToCafe' : '/ScrapToCafe.nhn'
+	}
+	
+</script>
+<script type="text/javascript">
+document.domain = 'naver.com';
+var blogId = "cocodoc"
+var gMCA = JSON.parse('{"mobileInAppType":"NOTINAPP","mobileBrowser":{"type":"UNDEFINED","version":0.0,"safari":false,"isAndroid":false,"android":false,"androidGingerbread":false,"isDolfin":false,"dolfin":false,"isOpera":false,"opera":false},"androidNewStyleAppVersion":false,"inAppVersion":"2.0.0","isNaverInApp":false,"notInAppSafariOrAndroidBrowser":false,"naverServiceAppInstallUrl":"/services.html","blogAppInstallUrl":"http://m.naver.com/services.html","isAndroidApp":false,"isIOSApp":false,"inAppYn":false,"supportToolButton":false,"supportHappybeanWrite":false,"supportPostAlbumApp":false,"supportDaliyWrite":false,"supportBuddyAppPushAndBuddyInvitation":false,"stampEnabledAppVersion":false,"stampEnabledInBuddyListAppVersion":false,"lazyLoadableBrowser":false,"iOSMenuNavigationV2":false,"iOSMenuNavigationV1":false,"iOS7":false}');
+var gsPostTitle = "표고버섯이 제철입니다..천연조미료 표고버섯가루 만들어 보세요.^^    [제철음식,천연조미료만드는법,꼬꼬네사랑폐백] : 네이버 블로그";
+var gnCategoryNo = 14;
+
+var sIndexInfo = '[{"blogId":"cocodoc","logNo":220161519279,"categoryNo":14,"parentCategoryNo":null,"addDate":1414230879920,"logType":0},{"blogId":"cocodoc","logNo":220060823031,"categoryNo":14,"parentCategoryNo":null,"addDate":1405394580940,"logType":0},{"blogId":"cocodoc","logNo":20207773342,"categoryNo":14,"parentCategoryNo":null,"addDate":1396181240870,"logType":0},{"blogId":"cocodoc","logNo":20207482528,"categoryNo":14,"parentCategoryNo":null,"addDate":1395589935383,"logType":0}]';
+var sStartLogNo = '220161519279';
+var sNavType = 'bg';
+var sDirectorySeq = '';
+var sBuddyGroupId = '';
+
+
+var readOnlyStatus = false;
+var readOnlyStatusAll = false;
+var readOnlyLinkErrorMsgMobile = '블로그 점검 중으로 기존 글 삭제 덧글 답글 공감 이웃추가 구독하기 새글OFF 그룹이동 기능이 제한됩니다.';
+
+
+
+
+
+var safariBrowser = "SAFARI";
+var safariIpadBrowser = "SAFARI_IPAD";
+var androidBrowser = "ANDROID";
+var androidGalTabBrowser = "ANDROID_GALTAB";
+var androidHoneyCombBrowser = "ANDROID_HONEYCOMB";
+
+var gBrowserType = "UNDEFINED";
+var inAppVersion = "2.0.0";
+var isInApp = false;
+var isAndroidBrowser = (gBrowserType == androidBrowser) || (gBrowserType == androidGalTabBrowser) || (gBrowserType == androidHoneyCombBrowser);
+var isSafariBrowser = (gBrowserType == safariBrowser || gBrowserType == safariIpadBrowser);
+
+var userId = "";
+var scrapedInfo = {
+		bMemo : false,
+		logNo : 0
+	}
+
+
+
+var gBannerListMapJson = '{\"POST_VIEW_BOTTOM_WEB\":[{\"bannerId\":176,\"title\":\"블로그앱에디터_ 모바일웹 엔드\",\"startDate\":1414403100000,\"startDateStr\":null,\"endDate\":1415353500000,\"endDateStr\":null,\"state\":2,\"targetOS\":1,\"targetDevice\":0,\"targetAppVersion\":\"\",\"targetSection\":\"q\",\"bannerType\":0,\"bannerImgUrl\":\"http:\/\/blogfiles.naver.net\/20141027_115\/bloglabdefaultid_1414403449235cApzu_PNG\/end2.png\",\"bannerText\":\"\",\"bannerLink\":\"http:\/\/m.blog.naver.com\/event\/NewAppEditorGuide.nhn\",\"nclickCode\":\"pst.bpromo\",\"addDate\":1414403587941,\"modiDate\":1414403736475,\"bannerBgcolor\":\"#0ed56d\",\"stateTypeValue\":\"ACTIVATE\",\"targetDeviceTypeValue\":\"ALL\",\"targetSectionDesc\":\"포스트보기하단-웹\",\"bannerTypeValue\":\"IMAGE\",\"encodedBannerImgUrl\":\"http%3A%2F%2Fblogfiles.naver.net%2F20141027_115%2Fbloglabdefaultid_1414403449235cApzu_PNG%2Fend2.png\",\"encodedBannerText\":\"\",\"startDateFormatted\":\"2014\/10\/27 18:45\",\"endDateFormatted\":\"2014\/11\/07 18:45\"},{\"bannerId\":175,\"title\":\"포스트앱에디터\",\"startDate\":1414549200000,\"startDateStr\":null,\"endDate\":1415113140000,\"endDateStr\":null,\"state\":2,\"targetOS\":1,\"targetDevice\":0,\"targetAppVersion\":\"\",\"targetSection\":\"q\",\"bannerType\":0,\"bannerImgUrl\":\"http:\/\/blogfiles.naver.net\/20141027_156\/bloglabdefaultid_14143716548974TU2B_PNG\/3_1_%BA%ED%B7%CE%B1%D7_%B8%F0%B9%D9%C0%CF%C0%A5%BF%A3%B5%E5%B6%EC%B9%E8%B3%CA_640x120.png\",\"bannerText\":\"\",\"bannerLink\":\"http:\/\/post.naver.com\/event\/1410\/mobileEditor.nhn?frm=blog\",\"nclickCode\":\"pst.bpromo\",\"addDate\":1414371670547,\"modiDate\":1414490512788,\"bannerBgcolor\":\"#ef6863\",\"stateTypeValue\":\"ACTIVATE\",\"targetDeviceTypeValue\":\"ALL\",\"targetSectionDesc\":\"포스트보기하단-웹\",\"bannerTypeValue\":\"IMAGE\",\"encodedBannerImgUrl\":\"http%3A%2F%2Fblogfiles.naver.net%2F20141027_156%2Fbloglabdefaultid_14143716548974TU2B_PNG%2F3_1_%25BA%25ED%25B7%25CE%25B1%25D7_%25B8%25F0%25B9%25D9%25C0%25CF%25C0%25A5%25BF%25A3%25B5%25E5%25B6%25EC%25B9%25E8%25B3%25CA_640x120.png\",\"encodedBannerText\":\"\",\"startDateFormatted\":\"2014\/10\/29 11:20\",\"endDateFormatted\":\"2014\/11\/04 23:59\"}]}';
+
+
+var gdid = "90000003_000000000000003342A62EAF";
+var lcsUrl = "http://m.blog.naver.com/PostView.nhn?blogId=cocodoc&logNo=220161519279";
+var buddyController = null;
+
+$Element(window).attach("load", function(event) {	
+	lcs_do_gdid(gdid, lcsUrl);
+	
+	buddyController = new BuddyController("cocodoc");
+	buddyController.start();
+	
+	var bBlockPostFlick = "false" == "true";
+	new PostViewController(sIndexInfo, sStartLogNo, sNavType, "false", "", "http://spi.naver.net/js/release/socialplugin_unity_m_v1.js?", "http://openapi.map.naver.com/openapi/openapi_v23.js", bBlockPostFlick, "false", "14").start();
+	new BannerController(new BannerView(), new BannerModel(), isAndroidBrowser, false, "2.0.0").start();
+	new BlogAppAdController().start();
+	new RclickUtility().checkRClickYN(rightClickOpenYn, blogOwner);
+});
+</script>
+<script type="text/javascript" src="http://t.static.blog.naver.net/nmobile/versioning/PostView-4796728.js" charset="UTF-8"></script>
+
+
+
+
+
+<script type="text/javascript">
+
+var safariBrowser = "SAFARI";
+var safariIpadBrowser = "SAFARI_IPAD";
+var androidBrowser = "ANDROID";
+var androidGalTabBrowser = "ANDROID_GALTAB";
+var androidHoneyCombBrowser = "ANDROID_HONEYCOMB";
+var dolfinBrowser = "DOLFIN";
+var operaBrowser = "OPERA";
+
+
+var gBrowserType = "UNDEFINED";
+var gBrowserVersion = "0.0";
+var isSafariBrowser = (gBrowserType == safariBrowser || gBrowserType == safariIpadBrowser);
+var isIos4xSafariBrowser = isSafariBrowser && (navigator.userAgent.match(/OS 4_3/i)) ? true : false;
+var isIos5xSafariBrowser = isSafariBrowser && (navigator.userAgent.match(/OS 5/i)) ? true : false;
+var isAndroidBrowser = (gBrowserType == androidBrowser) || (gBrowserType == androidGalTabBrowser) || (gBrowserType == androidHoneyCombBrowser);
+var isAndroid4xBrowser = isAndroidBrowser && (navigator.userAgent.match(/Android 4./i)) ? true : false;
+var isAndroidGingerbread = false;
+var isDefaultTextSupportingBrowserType = false;
+var gIsNotInAppSafariOrAndroidBrowser = false;
+
+
+var gDeployPhase = "release";
+
+var ReloadFile=(function(){var d=2500;var b={};var h={};var c=5;function k(o){var n=o.split(/\/+/g);var p=n[n.length-1].split("?")[0].split(".")[0];return p}function a(){var n=document.getElementsByTagName("script");for(var p=0;p<n.length;p++){var q=n[p].src;if(q!=""&&q.toLowerCase().indexOf("lazyloading")<0&&(q.toLowerCase().indexOf("blog.naver.com")>-1||q.toLowerCase().indexOf("blog.naver.net")>-1)){var o=k(q);var r=o+"_js";n[p].id=r;f(r,c);l(r,q)}}}function g(){var n=document.getElementsByTagName("link");for(var p=0;p<n.length;p++){var r=n[p].href;var q=n[p].type;if("text/css"==q.toLowerCase()&&r!=""&&r.toLowerCase().indexOf("lazyloading")<0&&(r.toLowerCase().indexOf("blog.naver.com")>-1||r.toLowerCase().indexOf("blog.naver.net")>-1)){var o=k(r);var s=o+"_css";n[p].id=s;f(s,c);e(s,r)}}}function l(q,o){i(q);if((typeof window.defineNHNJS=="undefined"||typeof window.defineNHNJS[q]=="undefined")&&b[q].retry++<b[q].maxRetry){var n=document.getElementById(q);var p=document.createElement("script");p.type="text/javascript";p.id=n.id;p.charset=n.charset;p.src=o+"?"+new Date().getTime()+"_"+Math.floor(Math.random()*100)+1;n.parentNode.removeChild(n);document.getElementsByTagName("body")[0].appendChild(p);m(q,function(){l(q,o)})}}function m(o,n){if(b[o].maxRetry>1){h[o]=setTimeout(n,d)}}function f(o,n){b[o]={retry:0,maxRetry:n||1}}function i(n){if(typeof h[n]!="undefined"){clearTimeout(h[n]);h[n]=null}}function e(o,n){document.addEventListener("DOMContentLoaded",function(){j(o,n)},false)}function j(u,q){i(u);if(b[u].retry++<b[u].maxRetry){var t="defineNHNCSS_"+u;var s=document.getElementById(t);if(!s){var n=document.createElement("div");n.id=t;n.style.display="none";document.body.appendChild(n);s=document.getElementById(t)}var o=document.defaultView.getComputedStyle(s,"").getPropertyValue("color");if(o=="rgb(0, 0, 0)"){var p=document.getElementById(u);var r=document.createElement("link");r.rel="stylesheet";r.type="text/css";r.id=p.id;r.charset=p.charset;r.href=q+"?"+new Date().getTime()+"_"+Math.floor(Math.random()*100)+1;p.parentNode.removeChild(p);document.getElementsByTagName("body")[0].appendChild(r);m(u,function(){j(u,q)})}}}return{js:function(n){try{if(n==null||n=="local"){return}a()}catch(o){}},css:function(n){try{if(n==null||n=="local"){return}g()}catch(o){}}}})();if((isSafariBrowser||isAndroidBrowser)&&typeof gDeployPhase!="undefined"&&gDeployPhase!=""){if(window.attachEvent){window.attachEvent("onload",function(){ReloadFile.js(gDeployPhase)})}else{window.addEventListener("load",ReloadFile.js(gDeployPhase),false)}ReloadFile.css(gDeployPhase)};
+</script>
+</html>

@@ -39,6 +39,7 @@ object NaverArchiever {
     val html = Source.fromFile("cocodoc.220161519279").mkString
     val jsoup = Jsoup.parse(html)
     val blogname = jsoup.select("div#_post_property").attr("blogName")
+    val category =jsoup.select("a[class=_categoryName]").text
     val date = jsoup.select("div#_post_property").attr("addDate")
     val username = jsoup.select("div.post_writer strong.writer a").text
     val title = jsoup.select("div.tit_area h3.tit_h3").text

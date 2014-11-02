@@ -6,7 +6,7 @@ import java.nio.file.{Files, Paths}
 import akka.io.IO
 import akka.pattern.ask
 import org.jsoup.Jsoup
-import spray.can.Http
+import org.jsoup.nodes.Element
 import spray.client.pipelining._
 import spray.http._
 
@@ -18,7 +18,7 @@ import scala.util.regexp._
 object MiznetCookArchiever {
 
   def main(args:Array[String]) ={
-    Random.shuffle((1 to 163168).toList).take(1).foreach({
+    (1 to 63168).toList.foreach({
       n => miznetcookParse(s"http://board.miznet.daum.net/gaia/do/cook/recipe/mizr/read?articleId=$n&bbsId=MC001&pageIndex=1")
     })
 
@@ -28,24 +28,39 @@ object MiznetCookArchiever {
   def miznetcookParse(url:String)={
     val html = Source.fromURL(url, "UTF8").mkString
     val jsoup = Jsoup.parse(html)
-    val blogname = jsoup.select("div#_post_property").attr("blogName")
-    val category =jsoup.select("a[class=_categoryName]").text
-    val date = jsoup.select("div#_post_property").attr("addDate")
-    val username = jsoup.select("div.post_writer strong.writer a").text
-    val title = jsoup.select("div.feature_etc p.etc a").text
-    val summary = jsoup.select("meta._og_tag._description").attr("content")
-    val thumbnail = jsoup.select("meta._og_tag._image").attr("content")
-    val images = jsoup.select("div.post_ct span._img._inl").toArray
+    val blogname = jsoup.select("div.feature_etc p.etc a").text
+
+
+    val _cate = jsoup.select("dt[class=first category]")
+
+    val category = _cate.get(0).nextElementSibling()
+
+    val level = category.nextElementSibling().nextElementSibling().nextElementSibling().nextElementSibling().text()
+
+    val date = jsoup.select("span.date").text()
+
+    val title = jsoup.select("div.feature_etc h3 a").text
+    val images = jsoup.select("div.tx-content-container img").toArray
     val recipe = jsoup.select("div.post_ct#viewTypeSelector").text
 
+    val meterials1 = jsoup.select("dt[class=first stuff]").get(0).nextElementSibling()
+
+    val meterials2 = meterials1.nextElementSibling().nextElementSibling()
+    val tx_content_container = jsoup.select("div.tx-content-container").outerHtml()
+
+    val met1 = meterials1.text()
+    val met2 = meterials2.text()
+
+    println(tx_content_container)
+    println(level)
+    println(met1)
+    println(met2)
+    println(category.text())
     println(blogname)
     println(date)
-    println(username)
     println(title)
-    println(summary)
-    println(thumbnail)
     for (image <- images) {
-      val img_url = image.toString.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>","")
+      val img_url = image.asInstanceOf[Element].attr("src")
       println(img_url)
     }
     println(recipe)

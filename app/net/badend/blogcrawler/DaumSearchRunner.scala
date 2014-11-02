@@ -17,64 +17,56 @@ import akka.pattern.ask
 import spray.can.Http
 import spray.http._
 import spray.client.pipelining._
-/**
- * Created by badend on 10/30/14.
- */
-object NaverRunner {
+
+// Created by dinaa1 on 11/2/14.
+object DaumSearchRunner {
 
   def main(args:Array[String]) ={
-    naverProcess
+    daumProcessSearch
   }
 
-  def naverParse(str:String)={
-
-
+  def daumParseForSearch(str:String)={
     val jsoup = Jsoup.parse(str)
 
-    val links = jsoup.select("a[class^=_mouseover _mouseout _toggle _eachClick _updateTopPostViewCount _param]")
+    val links = jsoup.select("div.search_result_list li.fir a")
 
     import scala.collection.JavaConversions._
     val hrefs = for(link <- links) yield {
-      link.attr("href")
+      "m.blog.daum.net" + link.attr("href")
     }
     println(hrefs.mkString(","))
     hrefs
-
-    //(lastPublished, hrefs.toSeq)
-    //links.iterator().toIterator.foreach(x=>x.attr("href"))
-
-
-
   }
 
-  def naverProcess = {
+  def daumProcessSearch() = {
     import Actors._
     import system.dispatcher
     var cp = 1
     val pipeline: Future[SendReceive] =
       for (
         Http.HostConnectorInfo(connector, _) <-
-        IO(Http) ? Http.HostConnectorSetup("section.blog.naver.com", port = 80)
+        IO(Http) ? Http.HostConnectorSetup("m.blog.daum.net", port = 80)
       ) yield sendReceive(connector)
 
-
-    val naverURLS = Files.newBufferedWriter(Paths.get(s"naverURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val daumURLS = Files.newBufferedWriter(Paths.get(s"daum_search_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
-    var ncp = 0
-    while (ncp!=cp) {
-
-      val data = NaverCrawler.param(cp)
-      ncp=cp
+    while (true) {
+      val data = DaumSearchCrawler.param_post_search(cp)
+      val ncp = cp
       println(data)
-      val request = Post(NaverCrawler.url, FormData(data))
+      val request = Post(DaumSearchCrawler.url, FormData(data))
       val response: Future[HttpResponse] = pipeline.flatMap(_(request))
       response onComplete {
         case Success(s) => {
+          daumParseForSearch(s.entity.asString).foreach(x => {
+            daumURLS.synchronized {
+              println(x)
+              daumURLS.write(x)
+              daumURLS.newLine()
 
-          naverParse(s.entity.asString).foreach(x => {
-            naverURLS.write(x)
-            naverURLS.newLine()
-            cnt = cnt + 1
+              cnt = cnt + 1
+            }
+
           })
           cp=cp+1
         }
@@ -82,13 +74,11 @@ object NaverRunner {
         case _ => println("ERROR")
       }
 
-      while (ncp ==cp) {
+      while (cp == ncp) {
         Thread.sleep(10)
       }
 
-      naverURLS.flush()
-
-
+      daumURLS.flush()
     }
   }
 

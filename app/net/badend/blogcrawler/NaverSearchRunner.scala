@@ -52,10 +52,10 @@ object NaverSearchRunner {
     var cnt = 0
     while (true) {
 
-      val data = NaverCrawler.param_post_search(cp)
+      val data = NaverSearchCrawler.param_post_search(cp)
       val ncp = cp
       println(data)
-      val request = Post(NaverCrawler.url_post_search, FormData(data))
+      val request = Post(NaverSearchCrawler.url, FormData(data))
       val response: Future[HttpResponse] = pipeline.flatMap(_(request))
       response onComplete {
         case Success(s) => {

@@ -93,9 +93,13 @@ object NaverRunner {
         case Success(s) => {
 
           naverParseForSearch(s.entity.asString).foreach(x => {
-            naverURLS.write(x)
-            naverURLS.newLine()
-            cnt = cnt + 1
+            naverURLS.synchronized {
+              naverURLS.write(x)
+              naverURLS.newLine()
+
+              cnt = cnt + 1
+            }
+
           })
           cp=cp+1
         }

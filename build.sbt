@@ -56,6 +56,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % "2.1.0",
   "org.seleniumhq.selenium" % "selenium-java" % "2.44.0",
   "org.jsoup" % "jsoup" % "1.8.1",
+  "com.twitter.penguin" % "korean-text" % "1.0",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
   "org.scalatest" %% "scalatest" % "2.1.6" % "test",
   "org.scalatestplus" % "play_2.10" % "1.0.0" % "test",

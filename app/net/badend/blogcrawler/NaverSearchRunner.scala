@@ -48,7 +48,7 @@ object NaverSearchRunner {
         IO(Http) ? Http.HostConnectorSetup("section.blog.naver.com", port = 80)
       ) yield sendReceive(connector)
 
-    val naverURLS = Files.newBufferedWriter(Paths.get(s"naver_search_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naver_search_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     while (true) {
 

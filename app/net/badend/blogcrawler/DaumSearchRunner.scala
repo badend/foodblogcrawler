@@ -48,7 +48,7 @@ object DaumSearchRunner {
         IO(Http) ? Http.HostConnectorSetup("m.blog.daum.net", port = 80)
       ) yield sendReceive(connector)
 
-    val daumURLS = Files.newBufferedWriter(Paths.get(s"daum_search_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val daumURLS = Files.newBufferedWriter(Paths.get(s"data/daum_search_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     while (true) {
       val data = DaumSearchCrawler.param_post_search(cp)

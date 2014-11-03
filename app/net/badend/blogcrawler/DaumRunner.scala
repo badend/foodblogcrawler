@@ -44,7 +44,7 @@ object DaumRunner {
     var cp = 1
 
 
-    val daumURLS = Files.newBufferedWriter(Paths.get(s"daumURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val daumURLS = Files.newBufferedWriter(Paths.get(s"data/daumURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var ncp = -1
     var cnt = 0
     while (ncp!=cnt) {

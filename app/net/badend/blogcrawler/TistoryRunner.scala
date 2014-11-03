@@ -41,7 +41,7 @@ object TistoryRunner {
 
 
     var lastPublished = System.currentTimeMillis()
-    val tistoryURLS = Files.newBufferedWriter(Paths.get(s"tistoryURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val tistoryURLS = Files.newBufferedWriter(Paths.get(s"data/tistoryURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     while (true) {
       var lastp = lastPublished

@@ -58,7 +58,7 @@ object NaverRunner {
       ) yield sendReceive(connector)
 
 
-    val naverURLS = Files.newBufferedWriter(Paths.get(s"naverURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naverURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     var ncp = 0
     while (ncp!=cp) {

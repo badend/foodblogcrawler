@@ -2,7 +2,6 @@ package net.badend.blogcrawler
 
 import java.nio.charset.Charset
 import java.nio.file.{Paths, Files}
-import java.util.concurrent.TimeUnit
 
 import akka.actor.{Props, ActorSystem}
 import com.alibaba.fastjson.{JSONObject, JSON}
@@ -23,10 +22,10 @@ object NaverTermsRunner {
     naverTermsProcess
   }
 
-  def naverParseForSearch(str:String)={
+  def parsedForNaverTerms(str:String)={
     val jsoup = Jsoup.parse(str)
 
-    val links = jsoup.select("li.add_img h5 a")
+    val links = jsoup.select("a[href^=/entry.nhn]")
 
     import scala.collection.JavaConversions._
     val hrefs = for(link <- links) yield {
@@ -40,24 +39,17 @@ object NaverTermsRunner {
     import Actors._
     import system.dispatcher
     var cp = 1
-    val pipeline: Future[SendReceive] =
-      for (
-        Http.HostConnectorInfo(connector, _) <-
-        IO(Http) ? Http.HostConnectorSetup("m.terms.naver.com", port = 80)
-      ) yield sendReceive(connector)
-
     val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naver_terms_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     while (true) {
 
-      val data = NaverTermsCrawler.param(cp)
+      val data = NaverTermsCrawler.param(page=cp)
       val ncp = cp
-      println(data)
-      val request = Post(NaverTermsCrawler.url, FormData(data))
-      val response: Future[HttpResponse] = pipeline.flatMap(_(request))
-      response onComplete {
-        case Success(s) => {
-          naverParseForSearch(s.entity.asString).foreach(x => {
+      val url = s"${NaverTermsCrawler.url}?${data.map(x=>(s"${x._1}=${x._2}")).mkString("&")}"
+      println(url)
+      val response = scala.io.Source.fromURL(url).mkString
+          //println(response)
+      parsedForNaverTerms(response).foreach(x => {
             naverURLS.synchronized {
               println(x)
               naverURLS.write(x)
@@ -67,18 +59,13 @@ object NaverTermsRunner {
             }
 
           })
-          cp=cp+1
-        }
-        case Failure(f) => println(f)
-        case _ => println("ERROR")
-      }
 
-      while (cp == ncp) {
-        Thread.sleep(10)
-      }
 
       naverURLS.flush()
+
+      cp = cp +1
     }
+    naverURLS.close()
   }
 
 }

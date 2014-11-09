@@ -5,7 +5,6 @@ import java.nio.file.{Paths, Files}
 import java.util.concurrent.TimeUnit
 
 import akka.actor.{Props, ActorSystem}
-import com.alibaba.fastjson.{JSONObject, JSON}
 import org.jsoup.Jsoup
 
 import scala.concurrent.Future

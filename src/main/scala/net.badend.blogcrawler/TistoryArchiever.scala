@@ -19,11 +19,11 @@ import scala.util.regexp._
 object TistoryArchiever {
 
   def main(args:Array[String]) ={
-    //  tistoryFeeds()
+    tistoryFeeds()
     tistoryParse()
   }
 
-  /* def tistoryFeeds() = {
+  def tistoryFeeds() = {
      for (line <- Source.fromFile("tistoryURLS_2").getLines()) {
        val murl =  line match {
          case tistorypc(domain, docid) => s"http://m.blog.tistory.com/$domain/$docid"
@@ -32,7 +32,7 @@ object TistoryArchiever {
        }
        println(murl)
      }
-   }*/
+   }
 
   def tistoryParse()={
     val html = Source.fromURL("http://heysukim114.tistory.com/m/post/3136").mkString

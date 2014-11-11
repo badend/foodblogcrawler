@@ -42,28 +42,35 @@ object NaverTermsRunner {
     val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naver_terms_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     while (true) {
+      try {
 
-      val data = NaverTermsCrawler.param(page=cp)
-      val ncp = cp
-      val url = s"${NaverTermsCrawler.url}?${data.map(x=>(s"${x._1}=${x._2}")).mkString("&")}"
-      println(url)
-      val response = scala.io.Source.fromURL(url).mkString
-          //println(response)
-      parsedForNaverTerms(response).foreach(x => {
-            naverURLS.synchronized {
-              println(x)
-              naverURLS.write(x)
-              naverURLS.newLine()
+        val data = NaverTermsCrawler.param(page = cp)
+        val ncp = cp
+        val url = s"${NaverTermsCrawler.url}?${data.map(x => (s"${x._1}=${x._2}")).mkString("&")}"
+        println(url)
+        val response = scala.io.Source.fromURL(url).mkString
+        //println(response)
+        parsedForNaverTerms(response).foreach(x => {
+          naverURLS.synchronized {
+            println(x)
+            naverURLS.write(x)
+            naverURLS.newLine()
 
-              cnt = cnt + 1
-            }
+            cnt = cnt + 1
+          }
 
-          })
+        })
 
 
-      naverURLS.flush()
+        naverURLS.flush()
 
-      cp = cp +1
+        cp = cp + 1
+
+        Thread.sleep(100)
+      }
+      catch{
+        case e:Exception => e.printStackTrace()
+      }
     }
     naverURLS.close()
   }

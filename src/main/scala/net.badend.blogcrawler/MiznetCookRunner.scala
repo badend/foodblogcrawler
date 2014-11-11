@@ -37,7 +37,6 @@ object MiznetCookRunner {
     val hrefs = for(link <- links) yield {
       link.attr("href")
     }
-    println(hrefs.mkString(","))
     hrefs
 
     //(lastPublished, hrefs.toSeq)
@@ -67,21 +66,20 @@ object MiznetCookRunner {
 
       val data = MiznetCookCrawler.param(cp)
       ncp=cp
-      println(data)
+
       val request = Post(MiznetCookCrawler.url, FormData(data))
       val response: Future[HttpResponse] = pipeline.flatMap(_(request))
       response onComplete {
         case Success(s) => {
 
           miznetcookParse(s.entity.asString).foreach(x => {
-            println(x)
             miznetcookURLS.write(x)
             miznetcookURLS.newLine()
             cnt = cnt + 1
           })
           cp=cp+1
         }
-        case Failure(f) => println(f)
+        case Failure(f) => //println(f)
         case _ => println("ERROR")
       }
 
@@ -93,6 +91,7 @@ object MiznetCookRunner {
 
 
     }
+    miznetcookURLS.close()
   }
 
 }

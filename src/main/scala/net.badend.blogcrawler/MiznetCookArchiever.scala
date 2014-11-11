@@ -15,16 +15,41 @@ import scala.util.{Random, Failure, Success}
 import scala.io._
 import scala.util.regexp._
 
+import org.json4s._
+import org.json4s.jackson.Serialization
+import org.json4s.jackson.Serialization.{read => r, write => w}
+
 object MiznetCookArchiever {
 
+  implicit val formats = org.json4s.DefaultFormats
   def main(args:Array[String]) ={
-    (1 to 63168).toList.foreach({
-      n => miznetcookParse(s"http://board.miznet.daum.net/gaia/do/cook/recipe/mizr/read?articleId=$n&bbsId=MC001&pageIndex=1")
+
+
+    val miznetcook = Files.newBufferedWriter(Paths.get(s"data/miznetcookDataS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+
+    (1 to 70000).toList.take(1).foreach({
+      n =>
+        var json = ""
+        try {
+
+          json = w(miznetcookParse(s"http://board.miznet.daum.net/gaia/do/cook/recipe/mizr/read?articleId=$n&bbsId=MC001&pageIndex=1"))
+
+          println(json)
+          miznetcook.write(json)
+          miznetcook.newLine()
+          miznetcook.flush()
+        }catch{
+          case e:Exception => e.printStackTrace()
+            println(json)
+        }
     })
+    miznetcook.close()
 
   }
 
 
+  case class MisznetCook(title:String, images:Seq[String], blogname:String, category:String, level:String, date:String,
+                         recipe:String, met1:String, met2:String)
   def miznetcookParse(url:String)={
     val html = Source.fromURL(url, "UTF8").mkString
     val jsoup = Jsoup.parse(html)
@@ -33,6 +58,7 @@ object MiznetCookArchiever {
 
     val _cate = jsoup.select("dt[class=first category]")
 
+    println(_cate)
     val category = _cate.get(0).nextElementSibling()
 
     val level = category.nextElementSibling().nextElementSibling().nextElementSibling().nextElementSibling().text()
@@ -51,18 +77,13 @@ object MiznetCookArchiever {
     val met1 = meterials1.text()
     val met2 = meterials2.text()
 
-    println(tx_content_container)
-    println(level)
-    println(met1)
-    println(met2)
-    println(category.text())
-    println(blogname)
-    println(date)
-    println(title)
-    for (image <- images) {
+    val imgs= for (image <- images) yield {
       val img_url = image.asInstanceOf[Element].attr("src")
-      println(img_url)
+
+      img_url
     }
-    println(recipe)
+    MisznetCook(
+    title=title, images=imgs, blogname=blogname, category=category.text(), level=level, date=date,met1=met1, met2=met2, recipe=recipe
+    )
   }
 }

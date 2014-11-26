@@ -27,12 +27,16 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.3.6",
   "com.google.guava" % "guava" % "18.0",
   "org.json4s" %% "json4s-jackson" % "3.2.10",
+  "org.json4s" %% "json4s-native" % "3.2.10",
   "org.json4s" %% "json4s-ext" % "3.2.10",
   "com.typesafe.slick" %% "slick" % "2.1.0",
   "org.seleniumhq.selenium" % "selenium-java" % "2.44.0",
   "org.jsoup" % "jsoup" % "1.8.1",
   "com.alibaba" % "fastjson" % "1.2.1",
   "com.github.nscala-time" %% "nscala-time" % "1.4.0",
+  "org.json4s" %% "json4s-jackson" % "3.2.10",
+  "org.json4s" %% "json4s-native" % "3.2.10",
+  "org.json4s" %% "json4s-ext" % "3.2.10",
   "com.twitter.penguin" % "korean-text" % "1.0",
   "org.scalatest" % "scalatest_2.10" % "2.1.6" % "test")
 

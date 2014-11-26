@@ -25,9 +25,9 @@ object MiznetCookArchiever {
   def main(args:Array[String]) ={
 
 
-    val miznetcook = Files.newBufferedWriter(Paths.get(s"data/miznetcookDataS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val miznetcook = Files.newBufferedWriter(Paths.get(s"data/miznetcookDataS_2.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
 
-    (1 to 70000).toList.take(1).foreach({
+    (7000 to 70000).toList.foreach({
       n =>
         var json = ""
         try {

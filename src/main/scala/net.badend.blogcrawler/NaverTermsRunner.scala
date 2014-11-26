@@ -1,5 +1,6 @@
 package net.badend.blogcrawler
 
+import java.net.URL
 import java.nio.charset.Charset
 import java.nio.file.{Paths, Files}
 
@@ -48,7 +49,8 @@ object NaverTermsRunner {
         val ncp = cp
         val url = s"${NaverTermsCrawler.url}?${data.map(x => (s"${x._1}=${x._2}")).mkString("&")}"
         println(url)
-        val response = scala.io.Source.fromURL(url).mkString
+        val response = scala.io.Source.fromInputStream(new URL(url).openStream(), "utf8").mkString
+        //scala.io.Source.fromURL(url, "utf8").mkString
         //println(response)
         parsedForNaverTerms(response).foreach(x => {
           naverURLS.synchronized {

@@ -1,5 +1,6 @@
 package net.badend.blogcrawler
 
+import java.net.URLEncoder
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
@@ -16,26 +17,44 @@ import scala.util.{Failure, Success}
 import scala.io._
 import scala.util.regexp._
 
+import org.json4s._
+import org.json4s.jackson.Serialization
+import org.json4s.jackson.Serialization.{read => r, write => w}
+
 object TistoryArchiever {
+
+  implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
 
   def main(args:Array[String]) ={
     tistoryFeeds()
-    tistoryParse()
+//    tistoryParse()
   }
 
   def tistoryFeeds() = {
-     for (line <- Source.fromFile("tistoryURLS_2").getLines()) {
-       val murl =  line match {
-         case tistorypc(domain, docid) => s"http://m.blog.tistory.com/$domain/$docid"
-         case tistoryme(domain, docid) => s"http://m.blog.tistory.com/$domain/$docid"
-         case _ => "not matched tistory mobile url"
-       }
+    val dt = "2014-11-11"
+     Source.fromFile(s"data/tistoryURLS.${dt}").getLines().take(1).foreach{line =>
+
+
+       val murl = line.replace("tistory.com/", "tistory.com/m/post/")
        println(murl)
+
+       val defaultDir = "data/tistory/post"
+       val dir = Paths.get(defaultDir)
+       Files.createDirectories(dir)
+       val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))
+       val post = tistoryParse(murl)
+
+
+       wfile.write(w(post))
+       wfile.close()
+
+
+
      }
    }
 
-  def tistoryParse()={
-    val html = Source.fromURL("http://heysukim114.tistory.com/m/post/3136").mkString
+  def tistoryParse(url:String)={
+    val html = Source.fromURL(url).mkString
     //println(html)
     val jsoup = Jsoup.parse(html)
     val blogname = jsoup.select("div#header h1 a#blogTitle").text
@@ -56,18 +75,22 @@ object TistoryArchiever {
     val images = jsoup.select("div.area_content img[class^=item_image able_slideshow]").toArray
 
 
-    println(category)
-    println(blogname)
-    println(date)
-    println(username)
-    println(title)
+    //println(category)
+    //println(blogname)
+    //println(date)
+    //println(username)
+    //println(title)
     /*println(summary)
     println(thumbnail)*/
-    println(recipe)
-    for (image <- images) {
+    //println(recipe)
+    val imgs = for (image <- images) yield {
       val img_url = image.asInstanceOf[Element].attr("src")//.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>","")
-      println(img_url)
+      //println(img_url)
+      img_url
     }
 
+    //val url:String, val title:String, val category:String, val date:String, val ingredient:String, val text:String, val images:Seq[String], val nickname:String, val id:String, val comment_no:Int, val like:Int) {
+
+    new BlogPost(url = url, title = title, category = category, date = date, ingredient = null, text = recipe, images= imgs, id=null, nickname = username, comment_no=0, like=0)
   }
 }

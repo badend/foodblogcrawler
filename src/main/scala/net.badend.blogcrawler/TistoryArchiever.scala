@@ -2,7 +2,7 @@ package net.badend.blogcrawler
 
 import java.net.URLEncoder
 import java.nio.charset.Charset
-import java.nio.file.{Files, Paths}
+import java.nio.file.{StandardOpenOption, Files, Paths}
 
 import akka.io.IO
 import akka.pattern.ask
@@ -26,17 +26,21 @@ object TistoryArchiever {
   implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
 
   def main(args:Array[String]) ={
+    /*val i = scala.io.Source.fromFile("data/ingredient2").getLines()
+    val f = Files.newBufferedWriter(Paths.get("data/ingredient3"), Charset.forName("utf8"), StandardOpenOption.CREATE)
+    i.toSet.filter(x=>x.size>1).toSeq.sorted.foreach{x=>f.write(x);f.newLine()}
+    f.close*/
     tistoryFeeds()
 //    tistoryParse()
   }
 
   def tistoryFeeds() = {
     val dt = "2014-11-11"
-     Source.fromFile(s"data/tistoryURLS.${dt}").getLines().take(1).foreach{line =>
+     Source.fromFile(s"data/tistoryURLS.${dt}").getLines().take(2).foreach{line =>
 
 
        val murl = line.replace("tistory.com/", "tistory.com/m/post/")
-       println(murl)
+
 
        val defaultDir = "data/tistory/post"
        val dir = Paths.get(defaultDir)
@@ -44,7 +48,7 @@ object TistoryArchiever {
        val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))
        val post = tistoryParse(murl)
 
-
+       println(murl)
        wfile.write(w(post))
        wfile.close()
 
@@ -90,7 +94,12 @@ object TistoryArchiever {
     }
 
     //val url:String, val title:String, val category:String, val date:String, val ingredient:String, val text:String, val images:Seq[String], val nickname:String, val id:String, val comment_no:Int, val like:Int) {
+    val meterials = IngredientService.ac.find(recipe)
+    val met = meterials.groupBy(x=>x.actual).map(x=>(x._1, x._2.head.start)).groupBy(x=>x._2).map(x=>x._2.maxBy(x=>x._1.size)).groupBy(x=>x._1.size + x._2).map(x=>x._2.maxBy(y=>y._1.size))
 
-    new BlogPost(url = url, title = title, category = category, date = date, ingredient = null, text = recipe, images= imgs, id=null, nickname = username, comment_no=0, like=0)
+    new BlogPost(url = url, title = title,
+      category = category, date = date,
+      ingredient = met.map(x=>x._1).mkString(","), text = recipe,
+      images= imgs, id=username, nickname = username, comment_no=0, like=0)
   }
 }

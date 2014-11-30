@@ -1,45 +1,49 @@
 package net.badend.blogcrawler
 
+import java.net.URL
 import java.nio.charset.Charset
-import java.nio.file.{Files, Paths}
 
-import akka.io.IO
-import akka.pattern.ask
 import org.jsoup.Jsoup
-import spray.can.Http
-import spray.client.pipelining._
-import spray.http._
 
-import scala.concurrent.Future
-import scala.util.{Failure, Success}
 import scala.io._
-import scala.util.regexp._
 
 object NaverArchiever {
 
-  def main(args:Array[String]) ={
-    naverFeeds()
-    naverParse()
+  def main(args: Array[String]) = {
+    val file = if (args.size > 0) args(0) else "data/naverURLS.2014-11-01"
+    naverFeeds(file)
+
   }
 
-  def naverFeeds() = {
+  def naverFeeds(file: String) = {
     val naverpc = """http://blog.naver.com/(\w+)\?.*&logNo=(\d+).*""".r
     val naverme = """http://(\w+).blog.me/(\d+)""".r
-    for (line <- Source.fromFile("naverURLS_2").getLines()) {
-      val murl =  line match {
-          case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
-          case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
-          case _ => "not matched naver mobile url"
-      }
-      println(murl)
+    val murl = for (line <- Source.fromFile(file).getLines()) yield {
+      Option(line match {
+        case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+        case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+        case _ => {
+          println(line)
+          println("not matched naver mobile url")
+          null
+        }
+      })
     }
+    murl.foreach(url => {
+      if(url.isDefined) {
+        println(url)
+        naverParse(url.get)
+      }else{
+        println(url)
+      }
+    })
   }
 
-  def naverParse()={
-    val html = Source.fromFile("cocodoc.220161519279").mkString
+  def naverParse(url: String) = {
+    val html = scala.io.Source.fromURL(new URL(url))(Charset.forName("UTF8")).mkString
     val jsoup = Jsoup.parse(html)
     val blogname = jsoup.select("div#_post_property").attr("blogName")
-    val category =jsoup.select("a[class=_categoryName]").text
+    val category = jsoup.select("a[class=_categoryName]").text
     val date = jsoup.select("div#_post_property").attr("addDate")
     val username = jsoup.select("div.post_writer strong.writer a").text
     val title = jsoup.select("div.tit_area h3.tit_h3").text
@@ -54,10 +58,21 @@ object NaverArchiever {
     println(title)
     println(summary)
     println(thumbnail)
-    for (image <- images) {
-      val img_url = image.toString.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>","")
+    val imgs = for (image <- images) yield {
+      val img_url = image.toString.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>", "")
       println(img_url)
+
+      img_url
     }
-    println(recipe)
+    val meterials = IngredientService.ac.find(recipe)
+    val met = meterials.groupBy(x=>x.actual).map(x=>(x._1, x._2.head.start)).groupBy(x=>x._2).map(x=>x._2.maxBy(x=>x._1.size)).groupBy(x=>x._1.size + x._2).map(x=>x._2.maxBy(y=>y._1.size))
+    println(met)
+
+    new BlogPost(url = url, title = title,
+      category = category, date = date,
+      ingredient = met.map(x=>x._1).mkString(","), text = recipe,
+      images= imgs, id=username, nickname = username, comment_no=0, like=0)
+
+
   }
 }

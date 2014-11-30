@@ -34,8 +34,8 @@ object DaumArchiever {
     }
   }*/
 
-  def daumParse()={
-    val html = Source.fromURL("http://m.blog.daum.net/song-poto/1098?t__nil_best=rightimg").mkString
+  def daumParse(url:String)={
+    val html = Source.fromURL(url).mkString
     //println(html)
     val jsoup = Jsoup.parse(html)
     val blogname = jsoup.select("span[class=nick]").text
@@ -66,10 +66,17 @@ object DaumArchiever {
     /*println(summary)
     println(thumbnail)*/
     println(recipe)
-    for (image <- images) {
+    val imgs = for (image <- images) yield {
       val img_url = image.asInstanceOf[Element].attr("src")//.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>","")
       println(img_url)
+      img_url
     }
+    val meterials = IngredientService.ac.find(recipe)
+    val met = meterials.groupBy(x=>x.actual).map(x=>(x._1, x._2.head.start)).groupBy(x=>x._2).map(x=>x._2.maxBy(x=>x._1.size)).groupBy(x=>x._1.size + x._2).map(x=>x._2.maxBy(y=>y._1.size))
 
+    new BlogPost(url = url, title = title,
+      category = category, date = date,
+      ingredient = met.map(x=>x._1).mkString(","), text = recipe,
+      images= imgs, id=username, nickname = username, comment_no=0, like=0)
   }
 }

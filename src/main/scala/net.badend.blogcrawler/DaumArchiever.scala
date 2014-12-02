@@ -12,27 +12,24 @@ import spray.client.pipelining._
 import spray.http._
 
 import scala.concurrent.Future
-import scala.util.{Failure, Success}
+import scala.util.{Try, Failure, Success}
 import scala.io._
 import scala.util.regexp._
 
 object DaumArchiever {
 
   def main(args:Array[String]) ={
-  //  daumFeeds()
-    daumParse()
+    daumFeeds(Try{args(0)}.getOrElse("data/daumURLS.2014-10-30"))
+
   }
 
- /* def daumFeeds() = {
-    for (line <- Source.fromFile("daumURLS_2").getLines()) {
-      val murl =  line match {
-        case daumpc(domain, docid) => s"http://m.blog.daum.com/$domain/$docid"
-        case daumme(domain, docid) => s"http://m.blog.daum.com/$domain/$docid"
-        case _ => "not matched daum mobile url"
-      }
+  def daumFeeds(file:String) = {
+    for (line <- Source.fromFile(file).getLines()) {
+      val murl = line.replace("http://blog.daum.net", "http://m.blog.daum.net")
       println(murl)
+      daumParse(murl)
     }
-  }*/
+  }
 
   def daumParse(url:String)={
     val html = Source.fromURL(url).mkString

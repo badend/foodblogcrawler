@@ -1,6 +1,7 @@
 package net.badend.blogcrawler
 
 
+import java.net.URL
 import java.nio.charset.Charset
 import java.nio.file.{Paths, Files}
 import java.util.concurrent.TimeUnit
@@ -33,46 +34,39 @@ object TistoryRunner {
   def tistoryProcess = {
     import Actors._
     import system.dispatcher
-    val pipeline: Future[SendReceive] =
-      for (
-        Http.HostConnectorInfo(connector, _) <-
-        IO(Http) ? Http.HostConnectorSetup("www.tistory.com", port = 80)
-      ) yield sendReceive(connector)
-
 
     var lastPublished = System.currentTimeMillis()
     val tistoryURLS = Files.newBufferedWriter(Paths.get(s"data/tistoryURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
-    while (true) {
+    while (cnt<10000) {
       var lastp = lastPublished
       val data = TistoryCrawler.param(lastPublished = lastPublished, first = false)
       println(data)
-      val request = Post(TistoryCrawler.url, FormData(data))
-      val response: Future[HttpResponse] = pipeline.flatMap(_(request))
-      response onComplete {
-        case Success(s) => {
-          val parsedData = tistoryJson(s.entity.asString)
-          if (parsedData != null) {
-            if (parsedData._1 != null) {
-              lastPublished = parsedData._1
-            } else {
-              println("last is null")
-              lastPublished = lastPublished - 10000000
-            }
-            parsedData._2.foreach(x => {
-              tistoryURLS.write(x)
-              tistoryURLS.newLine()
-              cnt = cnt + 1
-            })
+      val tistoryurl = s"${TistoryCrawler.url}?${data.map(x => x._1 + "=" + x._2).mkString("&")}"
+      try {
+        val s = scala.io.Source.fromURL(new URL(tistoryurl))(Charset.forName("UTF8")).mkString
+        val parsedData = tistoryJson(s)
+        if (parsedData != null) {
+          if (parsedData._1 != null) {
+            lastPublished = parsedData._1
           } else {
             println("last is null")
             lastPublished = lastPublished - 10000000
           }
-
+          parsedData._2.foreach(x => {
+            tistoryURLS.write(x)
+            tistoryURLS.newLine()
+            cnt = cnt + 1
+          })
+        } else {
+          println("last is null")
+          lastPublished = lastPublished - 10000000
         }
-        case Failure(f) => println(f)
-        case _ => println("ERROR")
+
+
+
       }
+
 
       while (lastp == lastPublished) {
         Thread.sleep(10)

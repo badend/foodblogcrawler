@@ -47,7 +47,9 @@ object TistoryArchiever {
          val defaultDir = "data/tistory/post"
          val dir = Paths.get(defaultDir)
          Files.createDirectories(dir)
-         val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))
+         var filename = URLEncoder.encode(murl, "utf8")
+         if(filename.length>200) filename = filename.take(200)
+         val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${}"), Charset.forName("utf8"))
 
 
          println(murl)

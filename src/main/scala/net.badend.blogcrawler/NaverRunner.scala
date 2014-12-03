@@ -58,7 +58,7 @@ object NaverRunner {
     var cnt = 0
 
     var ncp = 0
-    while (ncp!=cp && cp<=3) {
+    while (ncp!=cp && cp<=100) {
 
       val data = NaverCrawler.param(cp)
       ncp = cp

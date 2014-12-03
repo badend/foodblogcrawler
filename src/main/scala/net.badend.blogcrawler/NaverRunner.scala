@@ -1,5 +1,6 @@
 package net.badend.blogcrawler
 
+import java.net.URL
 import java.nio.charset.Charset
 import java.nio.file.{Paths, Files}
 import java.util.concurrent.TimeUnit
@@ -35,9 +36,10 @@ object NaverRunner {
 
     import scala.collection.JavaConversions._
     val hrefs = for(link <- links) yield {
+      println(link.attr("href"))
       link.attr("href")
     }
-    println(hrefs.mkString(","))
+    println(hrefs.size +" collected")
     hrefs
 
     //(lastPublished, hrefs.toSeq)
@@ -51,36 +53,30 @@ object NaverRunner {
     import Actors._
     import system.dispatcher
     var cp = 1
-    val pipeline: Future[SendReceive] =
-      for (
-        Http.HostConnectorInfo(connector, _) <-
-        IO(Http) ? Http.HostConnectorSetup("section.blog.naver.com", port = 80)
-      ) yield sendReceive(connector)
-
 
     val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naverURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
+
     var ncp = 0
-    while (ncp!=cp && cp<=100) {
+    while (ncp!=cp && cp<=3) {
 
       val data = NaverCrawler.param(cp)
-      ncp=cp
-      println(data)
-      val request = Post(NaverCrawler.url, FormData(data))
-      val response: Future[HttpResponse] = pipeline.flatMap(_(request))
-      response onComplete {
-        case Success(s) => {
+      ncp = cp
+      val naverurl = s"${NaverCrawler.url}?${data.map(x => x._1 + "=" + x._2).mkString("&")}"
+      try {
+        val s = scala.io.Source.fromURL(new URL(naverurl))(Charset.forName("UTF8")).mkString
+        naverParse(s).foreach(x => {
+          naverURLS.write(x)
+          naverURLS.newLine()
+          cnt = cnt + 1
+        })
+        cp = cp + 1
 
-          naverParse(s.entity.asString).foreach(x => {
-            naverURLS.write(x)
-            naverURLS.newLine()
-            cnt = cnt + 1
-          })
-          cp=cp+1
-        }
-        case Failure(f) => println(f)
-        case _ => println("ERROR")
+
       }
+    catch    {
+      case e:Exception => e.printStackTrace()
+    }
 
       while (ncp ==cp) {
         Thread.sleep(10)

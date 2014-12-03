@@ -13,7 +13,7 @@ import spray.http.DateTime
  */
 object IngredientMaker {
   def main(args:Array[String])={
-  miznetProvider
+  miznetProvider(args(0))
   }
 
   val unit = Set("개", "t", "tc", "gm", "그람", "그램", "숫갈", "ts", "수저", "수푼", "스푼", "약간", "cc", "컵", "ml", "적당", "적당량",
@@ -25,12 +25,12 @@ object IngredientMaker {
 
   val trie = trieBuilfer.build()
 
-  def miznetProvider = {
+  def miznetProvider(file:String) = {
 
-    val fw = Files.newBufferedWriter(Paths.get(s"data/miznetIngredient.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val fw = Files.newBufferedWriter(Paths.get(s"data/ingredient.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
 
-    val miznet = "data/miznetcookDataS.2014-11-15"
-    val mets = scala.io.Source.fromFile(miznet, "utf8").getLines.toSeq.flatten{
+    //val miznet = "data/miznetcookDataS.2014-11-15"
+    val mets = scala.io.Source.fromFile(file, "utf8").getLines.toSeq.flatten{
       line =>
         val parsed = parse(line)
         val met1 = parsed \ "met1"

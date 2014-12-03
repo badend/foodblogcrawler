@@ -61,7 +61,7 @@ object NaverRunner {
     val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naverURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     var ncp = 0
-    while (ncp!=cp) {
+    while (ncp!=cp && cp<=100) {
 
       val data = NaverCrawler.param(cp)
       ncp=cp

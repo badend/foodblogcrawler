@@ -57,6 +57,8 @@ object TistoryArchiever {
          wfile.write(w(post))
          wfile.newLine()
          wfile.close()
+       }else{
+         println(s"ERR URL ${murl}")
        }
 
 

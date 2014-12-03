@@ -42,7 +42,13 @@ object TistoryArchiever {
        val murl = line.replace("tistory.com/", "tistory.com/m/post/")
 
 
-       val post = Try{tistoryParse(murl)}.toOption
+       val post =
+         Option(try {
+           tistoryParse(murl)
+         }catch{
+           case e:Exception => e.printStackTrace()
+         })
+
        if(post.isDefined) {
          val defaultDir = "data/tistory/post"
          val dir = Paths.get(defaultDir)

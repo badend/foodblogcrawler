@@ -49,10 +49,11 @@ object TistoryArchiever {
          Files.createDirectories(dir)
          var filename = URLEncoder.encode(murl, "utf8")
          if(filename.length>200) filename = filename.take(200)
-         val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${filename}"), Charset.forName("utf8"))
+         val dirfile = s"$defaultDir/${filename}"
+         val wfile = Files.newBufferedWriter(Paths.get(dirfile), Charset.forName("utf8"))
 
 
-         println(murl)
+         println(dirfile)
 
          wfile.write(w(post))
          wfile.newLine()

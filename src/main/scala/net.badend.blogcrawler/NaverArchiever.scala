@@ -1,13 +1,20 @@
 package net.badend.blogcrawler
 
-import java.net.URL
+import java.net.{URLEncoder, URL}
 import java.nio.charset.Charset
+import java.nio.file.{Files, Paths}
 
+import org.json4s.jackson.Serialization._
 import org.jsoup.Jsoup
 
 import scala.io._
+import scala.util.Try
 
+
+import org.json4s.jackson.Serialization.{read => r, write => w}
 object NaverArchiever {
+
+  implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
 
   def main(args: Array[String]) = {
     val file = if (args.size > 0) args(0) else "data/naverURLS.2014-11-01"
@@ -32,7 +39,22 @@ object NaverArchiever {
     murl.foreach(url => {
       if(url.isDefined) {
         println(url)
-        naverParse(url.get)
+        val post = Try{naverParse(url.get)}.toOption
+        if(post.isDefined) {
+          val defaultDir = "data/naver/post"
+          val dir = Paths.get(defaultDir)
+          Files.createDirectories(dir)
+          val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(url.get, "utf8")}"), Charset.forName("utf8"))
+
+
+          println(murl)
+
+          wfile.write(w(post))
+          wfile.newLine()
+          wfile.close()
+        }
+
+
       }else{
         println(url)
       }

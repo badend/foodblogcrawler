@@ -1,10 +1,12 @@
 package net.badend.blogcrawler
 
+import java.net.URLEncoder
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
 import akka.io.IO
 import akka.pattern.ask
+import org.json4s.jackson.Serialization._
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import spray.can.Http
@@ -16,8 +18,10 @@ import scala.util.{Try, Failure, Success}
 import scala.io._
 import scala.util.regexp._
 
+import org.json4s.jackson.Serialization.{read => r, write => w}
 object DaumArchiever {
 
+  implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
   def main(args:Array[String]) ={
     daumFeeds(Try{args(0)}.getOrElse("data/daumURLS.2014-10-30"))
 
@@ -27,7 +31,24 @@ object DaumArchiever {
     for (line <- Source.fromFile(file).getLines()) {
       val murl = line.replace("http://blog.daum.net", "http://m.blog.daum.net")
       println(murl)
-      daumParse(murl)
+      val post = Try{daumParse(murl)}.toOption
+      if(post.isDefined) {
+        val defaultDir = "data/daum/post"
+        val dir = Paths.get(defaultDir)
+        Files.createDirectories(dir)
+        val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))
+
+
+        println(murl)
+
+        wfile.write(w(post))
+        wfile.newLine()
+        wfile.close()
+      }
+
+
+
+
     }
   }
 
@@ -54,15 +75,6 @@ object DaumArchiever {
     val thumbnail = jsoup.select("meta._og_tag._image").attr("content")*/
     val images = jsoup.select("div#article p img.txc-image").toArray
 
-
-    println(category)
-    println(blogname)
-    println(date)
-    println(username)
-    println(title)
-    /*println(summary)
-    println(thumbnail)*/
-    println(recipe)
     val imgs = for (image <- images) yield {
       val img_url = image.asInstanceOf[Element].attr("src")//.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>","")
       println(img_url)

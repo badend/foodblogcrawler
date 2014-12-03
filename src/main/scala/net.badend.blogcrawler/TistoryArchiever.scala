@@ -13,7 +13,7 @@ import spray.client.pipelining._
 import spray.http._
 
 import scala.concurrent.Future
-import scala.util.{Failure, Success}
+import scala.util.{Try, Failure, Success}
 import scala.io._
 import scala.util.regexp._
 
@@ -42,15 +42,20 @@ object TistoryArchiever {
        val murl = line.replace("tistory.com/", "tistory.com/m/post/")
 
 
-       val defaultDir = "data/tistory/post"
-       val dir = Paths.get(defaultDir)
-       Files.createDirectories(dir)
-       val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))
-       val post = tistoryParse(murl)
+       val post = Try{tistoryParse(murl)}.toOption
+       if(post.isDefined) {
+         val defaultDir = "data/tistory/post"
+         val dir = Paths.get(defaultDir)
+         Files.createDirectories(dir)
+         val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))
 
-       println(murl)
-       wfile.write(w(post))
-       wfile.close()
+
+         println(murl)
+
+         wfile.write(w(post))
+         wfile.newLine()
+         wfile.close()
+       }
 
 
 

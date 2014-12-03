@@ -30,13 +30,13 @@ object TistoryArchiever {
     val f = Files.newBufferedWriter(Paths.get("data/ingredient3"), Charset.forName("utf8"), StandardOpenOption.CREATE)
     i.toSet.filter(x=>x.size>1).toSeq.sorted.foreach{x=>f.write(x);f.newLine()}
     f.close*/
-    tistoryFeeds()
+    tistoryFeeds(args(0))
 //    tistoryParse()
   }
 
-  def tistoryFeeds() = {
-    val dt = "2014-11-11"
-     Source.fromFile(s"data/tistoryURLS.${dt}").getLines().take(2).foreach{line =>
+  def tistoryFeeds(file:String) = {
+
+     Source.fromFile(file).getLines().foreach{line =>
 
 
        val murl = line.replace("tistory.com/", "tistory.com/m/post/")

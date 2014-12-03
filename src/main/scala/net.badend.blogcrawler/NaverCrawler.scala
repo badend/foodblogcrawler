@@ -7,10 +7,11 @@ object NaverCrawler {
 
   val url = "http://section.blog.naver.com/sub/PostListByDirectory.nhn"
   def param(cp:Int=1) = {
-    Map("option.page.currentPage"->s"$cp", "option.templateKind"->"0",
+    Map("option.page.currentPage"->s"$cp",
       "option.directorySeq"->"20",
     "option.viewType"-> "title",
-    "option.orderBy" ->"date" ,
+     "option.templateKind"->"35",
+    "option.orderBy" ->"quality" ,
       "option.latestOnly"->"0")
   }
 

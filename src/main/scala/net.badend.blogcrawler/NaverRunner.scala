@@ -32,14 +32,14 @@ object NaverRunner {
 
     val jsoup = Jsoup.parse(str)
 
-    val links = jsoup.select("a[class^=_mouseover _mouseout _toggle _eachClick _updateTopPostViewCount _param]")
+    val links = jsoup.select("ul[class=list_type_2] li h5 a[onclick^=clickcr(this,]")
 
     import scala.collection.JavaConversions._
     val hrefs = for(link <- links) yield {
-      println(link.attr("href"))
+      //println(link.attr("href"))
       link.attr("href")
     }
-    println(hrefs.size +" collected")
+    println(s"${hrefs.size} collected, ${hrefs.head}")
     hrefs
 
     //(lastPublished, hrefs.toSeq)
@@ -63,6 +63,7 @@ object NaverRunner {
       val data = NaverCrawler.param(cp)
       ncp = cp
       val naverurl = s"${NaverCrawler.url}?${data.map(x => x._1 + "=" + x._2).mkString("&")}"
+      println(naverurl)
       try {
         val s = scala.io.Source.fromURL(new URL(naverurl))(Charset.forName("UTF8")).mkString
         naverParse(s).foreach(x => {

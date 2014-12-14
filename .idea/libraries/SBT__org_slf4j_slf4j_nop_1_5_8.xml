@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: org.slf4j:slf4j-nop:1.5.8">
+    <CLASSES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/jars/org.slf4j/slf4j-nop/slf4j-nop-1.5.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/srcs/org.slf4j/slf4j-nop/slf4j-nop-1.5.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

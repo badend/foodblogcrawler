@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: org.apache.thrift:libthrift:0.9.1">
+    <CLASSES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/jars/org.apache.thrift/libthrift/libthrift-0.9.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/docs/org.apache.thrift/libthrift/libthrift-0.9.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

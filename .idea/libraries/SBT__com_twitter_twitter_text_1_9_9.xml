@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: com.twitter:twitter-text:1.9.9">
+    <CLASSES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/jars/com.twitter/twitter-text/twitter-text-1.9.9.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/docs/com.twitter/twitter-text/twitter-text-1.9.9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/srcs/com.twitter/twitter-text/twitter-text-1.9.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

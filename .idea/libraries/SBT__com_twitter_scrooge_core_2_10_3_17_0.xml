@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: com.twitter:scrooge-core_2.10:3.17.0">
+    <CLASSES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/jars/com.twitter/scrooge-core_2.10/scrooge-core_2.10-3.17.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/docs/com.twitter/scrooge-core_2.10/scrooge-core_2.10-3.17.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/srcs/com.twitter/scrooge-core_2.10/scrooge-core_2.10-3.17.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

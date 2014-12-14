@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="SBT: org.yaml:snakeyaml:1.12">
+    <CLASSES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/jars/org.yaml/snakeyaml/snakeyaml-1.12.jar!/" />
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/bundles/org.yaml/snakeyaml/snakeyaml-1.12.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/docs/org.yaml/snakeyaml/snakeyaml-1.12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///data3/badend_1404/git/foodblogcrawler/lib_managed/srcs/org.yaml/snakeyaml/snakeyaml-1.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

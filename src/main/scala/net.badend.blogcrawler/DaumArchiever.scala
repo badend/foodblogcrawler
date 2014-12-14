@@ -23,7 +23,7 @@ object DaumArchiever {
 
   implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
   def main(args:Array[String]) ={
-    daumFeeds(Try{args(0)}.getOrElse("data/daumURLS.2014-10-30"))
+    daumFeeds(Try{args(0)}.getOrElse("data/daumURLS.2014-12-03"))
 
   }
 
@@ -31,7 +31,7 @@ object DaumArchiever {
     for (line <- Source.fromFile(file).getLines()) {
       val murl = line.replace("http://blog.daum.net", "http://m.blog.daum.net")
       println(murl)
-      val post = Try{daumParse(murl)}.toOption
+      val post = Option{try{daumParse(murl)} catch{case e:Exception=>e.printStackTrace()}}
       if(post.isDefined) {
         val defaultDir = "data/daum/post"
         val dir = Paths.get(defaultDir)
@@ -44,6 +44,7 @@ object DaumArchiever {
         wfile.write(w(post))
         wfile.newLine()
         wfile.close()
+        Thread.sleep(100)
       }
 
 

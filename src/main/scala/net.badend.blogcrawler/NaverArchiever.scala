@@ -17,7 +17,7 @@ object NaverArchiever {
   implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
 
   def main(args: Array[String]) = {
-    val file = if (args.size > 0) args(0) else "data/naverURLS.2014-11-01"
+    val file = if (args.size > 0) args(0) else "data/naverURLS.2014-12-03"
     naverFeeds(file)
 
   }
@@ -39,7 +39,13 @@ object NaverArchiever {
     murl.foreach(url => {
       if(url.isDefined) {
         println(url)
-        val post = Try{naverParse(url.get)}.toOption
+        val post =
+          Option(try {
+            naverParse(url.get)
+          }catch{
+            case e:Exception => e.printStackTrace()
+          })
+
         if(post.isDefined) {
           val defaultDir = "data/naver/post"
           val dir = Paths.get(defaultDir)
@@ -52,6 +58,7 @@ object NaverArchiever {
           wfile.write(w(post))
           wfile.newLine()
           wfile.close()
+          Thread.sleep(100)
         }
 
 

@@ -1,6 +1,10 @@
 import sbt.Keys._
 import sbt._
-// pu
+import com.github.play2war.plugin._
+// put this at the top of the file
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
+
+
 name := "foodblogcrawler"
 
 version := "0.1.0-SNAPSHOT"
@@ -14,8 +18,6 @@ crossScalaVersions := Seq("2.10.4", "2.11.4")
 aggregate in runMain := true
 
 val sprayV = "1.3.1"
-
-net.virtualvoid.sbt.graph.Plugin.graphSettings
 
 val hadoopversion = "2.0.0-cdh4.6.0"
 
@@ -56,7 +58,7 @@ resolvers ++= Seq(  "Typesafe repository" at "http://repo.typesafe.com/typesafe/
 resolvers += "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository"
 
 
-javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 retrieveManaged := true
 

@@ -52,11 +52,35 @@ object DaumArchiever {
     }
   }
 
-  def daumParse(url:String)={
-    val html = Source.fromURL(url).mkString
-    //println(html)
-    val jsoup = Jsoup.parse(html)
-    val blogname = jsoup.select("span[class=nick]").text
+  def daumParse(rurl:String)={
+
+    val url = if( !rurl.contains("http://blog.daum.net")) rurl.replace("http://m.blog.daum.net", "http://blog.daum.net") else rurl
+
+    val jsoup = Jsoup.connect(url).get
+
+    import scala.collection.JavaConversions._
+    val blogname = jsoup.select("meta").filter(x=>x.attr("name").equals("title")).head.attr("content")
+    //val blogname = jsoup.select("meta[name=title]").html
+    val innerURL = jsoup.select("frame[name=BlogMain]").attr("src")
+    val innerJsoup = Jsoup.connect(s"http://blog.daum.net/$innerURL").get
+
+    val title = innerJsoup.select("head title").text
+    val username = innerJsoup.select("meta[name=author]").attr("content")
+
+    val date = innerJsoup.select("span.cB_Tdate").text
+    val category = innerJsoup.select("span.cB_Folder a.p12").text
+    val ifurl = innerJsoup.select("iframe[id^=if]").first.attr("src")
+    val ifJsoup = Jsoup.connect(s"http://blog.daum.net/$ifurl").get
+
+    val content = ifJsoup.select("div#contentDiv")
+    val recipe = content.html
+    val imgs = content.select("img[class^=txc]").map(x=>x.attr("src"))
+    val meterials = IngredientService.ac.find(recipe)
+    val met = meterials.groupBy(x=>x.actual).map(x=>(x._1, x._2.head.start)).groupBy(x=>x._2).map(x=>x._2.maxBy(x=>x._1.size)).groupBy(x=>x._1.size + x._2).map(x=>x._2.maxBy(y=>y._1.size))
+
+//    for mobile
+/*
+    val blogname = jsoup.select("div[class^=head_navi] > h2").html
     val date = jsoup.select("span[class=date]").text
     val username = jsoup.select("div.post_writer strong.writer a").text
     val title = jsoup.select("p[class=title]").text
@@ -70,8 +94,8 @@ object DaumArchiever {
       (recipe_current, an)=>
         println(an)
         (recipe_current.replace(an,""))
-    }*/
-    /*val summary = jsoup.select("meta._og_tag._description").attr("content")
+    }
+    val summary = jsoup.select("meta._og_tag._description").attr("content")
     val thumbnail = jsoup.select("meta._og_tag._image").attr("content")*/
     val images = jsoup.select("div#article p img.txc-image").toArray
 
@@ -83,9 +107,11 @@ object DaumArchiever {
     val meterials = IngredientService.ac.find(recipe)
     val met = meterials.groupBy(x=>x.actual).map(x=>(x._1, x._2.head.start)).groupBy(x=>x._2).map(x=>x._2.maxBy(x=>x._1.size)).groupBy(x=>x._1.size + x._2).map(x=>x._2.maxBy(y=>y._1.size))
 
+    */
+    val comment_no = innerJsoup.select("label[id^=cmmt]").text.toInt
     new BlogPost(url = url, title = title,
       category = category, date = date,
       ingredient = met.map(x=>x._1).mkString(","), text = recipe,
-      images= imgs, id=username, nickname = username, comment_no=0, like=0)
+      images= imgs, id=username, nickname = blogname, comment_no=comment_no, like=0)
   }
 }

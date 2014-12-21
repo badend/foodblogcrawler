@@ -4,7 +4,6 @@ import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
 import akka.io.IO
-import akka.pattern.ask
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import spray.client.pipelining._

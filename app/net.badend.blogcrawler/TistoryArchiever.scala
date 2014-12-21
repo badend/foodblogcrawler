@@ -73,7 +73,9 @@ object TistoryArchiever {
      }
    }
 
-  def tistoryParse(url:String)={
+  def tistoryParse(rurl:String)={
+
+    val url =   if( !rurl.contains("tisotry.com/m")) rurl.replace("tistory.com/", "tistory.com/m/post/") else rurl
     val html = Source.fromURL(url).mkString
     //println(html)
     val jsoup = Jsoup.parse(html)

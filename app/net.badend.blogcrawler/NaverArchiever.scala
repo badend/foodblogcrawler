@@ -21,10 +21,9 @@ object NaverArchiever {
     naverFeeds(file)
 
   }
-
+  val naverpc = """http://blog.naver.com/(\w+)\?.*&logNo=(\d+).*""".r
+  val naverme = """http://(\w+).blog.me/(\d+)""".r
   def naverFeeds(file: String) = {
-    val naverpc = """http://blog.naver.com/(\w+)\?.*&logNo=(\d+).*""".r
-    val naverme = """http://(\w+).blog.me/(\d+)""".r
     val murl = for (line <- Source.fromFile(file).getLines()) yield {
       Option(line match {
         case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
@@ -60,8 +59,17 @@ object NaverArchiever {
       }
     })
   }
+  def naverParse(rurl: String) = {
+    val url:String = rurl match {
+        case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+        case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+        case _ => {
+          println("not matched naver mobile url")
+          throw new UnsupportedOperationException("네이버 주소가 첨보는건데요?")
+        }
+      }
 
-  def naverParse(url: String) = {
+
     val html = scala.io.Source.fromURL(new URL(url))(Charset.forName("UTF8")).mkString
     val jsoup = Jsoup.parse(html)
     val blogname = jsoup.select("div#_post_property").attr("blogName")

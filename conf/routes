@@ -1,0 +1,1 @@
+GET /parse      net.badend.blogcrawler.APIParse.parseApi(blog:String, url:String)

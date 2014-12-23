@@ -30,7 +30,7 @@ object TistoryArchiever {
     val f = Files.newBufferedWriter(Paths.get("data/ingredient3"), Charset.forName("utf8"), StandardOpenOption.CREATE)
     i.toSet.filter(x=>x.size>1).toSeq.sorted.foreach{x=>f.write(x);f.newLine()}
     f.close*/
-    tistoryFeeds(args(0))
+    tistoryFeeds((Try{args(0)}.getOrElse("data/tistoryURLS.2014-12-03")))
 //    tistoryParse()
   }
 
@@ -64,6 +64,7 @@ object TistoryArchiever {
          wfile.write(w(post))
          wfile.newLine()
          wfile.close()
+         Thread.sleep(100)
        }else{
          println(s"ERR URL ${murl}")
        }

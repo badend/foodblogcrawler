@@ -23,11 +23,13 @@ object NaverArchiever {
   }
   val naverpc = """http://blog.naver.com/(\w+)\?.*&logNo=(\d+).*""".r
   val naverme = """http://(\w+).blog.me/(\d+)""".r
+  val naverme2 = """http://m.blog.naver.com/(\w+)/(\d+).*""".r
   def naverFeeds(file: String) = {
     val murl = for (line <- Source.fromFile(file).getLines()) yield {
       Option(line match {
         case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+        case naverme2(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case _ => {
           println(line)
           println("not matched naver mobile url")
@@ -70,6 +72,7 @@ object NaverArchiever {
     val url:String = rurl match {
         case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+        case naverme2(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case _ => {
           println("not matched naver mobile url")
           throw new UnsupportedOperationException("네이버 주소가 첨보는건데요?")

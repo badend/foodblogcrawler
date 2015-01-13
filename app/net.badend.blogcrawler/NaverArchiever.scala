@@ -69,6 +69,9 @@ object NaverArchiever {
     })
   }
   def naverParse(rurl: String) = {
+    var domain:String = null
+    var docid:String = null
+
     val url:String = rurl match {
         case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
@@ -111,7 +114,7 @@ object NaverArchiever {
     new BlogPost(url = url, title = title,
       category = category, date = date,
       ingredient = met.map(x=>x._1).mkString(","), text = recipe,
-      images= imgs, id=username, nickname = username, comment_no=0, like=0)
+      images= imgs, id=domain, nickname = username, comment_no=0, like=0)
 
 
   }

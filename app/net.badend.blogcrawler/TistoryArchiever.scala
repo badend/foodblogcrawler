@@ -39,7 +39,7 @@ object TistoryArchiever {
      Source.fromFile(file).getLines().foreach{line =>
 
 
-       val murl = line.replace("tistory.com/", "tistory.com/m/post/")
+       val murl = line.replace("tistory.com/", "tistory.com/")
 
 
        val post =
@@ -60,8 +60,9 @@ object TistoryArchiever {
 
 
          println(dirfile)
-
-         wfile.write(w(post))
+         val strpost = w(post)
+         println(strpost)
+         wfile.write(strpost)
          wfile.newLine()
          wfile.close()
          Thread.sleep(100)
@@ -76,7 +77,8 @@ object TistoryArchiever {
 
   def tistoryParse(rurl:String)={
 
-    val url =   if( !rurl.contains("tisotry.com/m")) rurl.replace("tistory.com/", "tistory.com/m/post/") else rurl
+    val url =   if( !rurl.contains("tistory.com/m")) rurl.replace("tistory.com/", "tistory.com/m/post/") else rurl
+    val id = url.take(url.indexOf("tistory.com") - 1).replace("http://", "")
     val html = Source.fromURL(url).mkString
     //println(html)
     val jsoup = Jsoup.parse(html)
@@ -89,7 +91,7 @@ object TistoryArchiever {
     val category = jsoup.select("span.owner_info span.category_info").text
     jsoup.select("span.owner_info span.category_info").remove()
     jsoup.select("span.owner_info span.txt_bar").remove()
-    val username = jsoup.select("span.owner_info").text()
+    val username = jsoup.select("span.owner_info").text().replaceAll(" 앱으로 보기","")
 
 
     val recipe = jsoup.select("div.area_content").outerHtml()
@@ -119,6 +121,6 @@ object TistoryArchiever {
     new BlogPost(url = url, title = title,
       category = category, date = date,
       ingredient = met.map(x=>x._1).mkString(","), text = recipe,
-      images= imgs, id=username, nickname = username, comment_no=0, like=0)
+      images= imgs, id=id, nickname = username, comment_no=0, like=0)
   }
 }

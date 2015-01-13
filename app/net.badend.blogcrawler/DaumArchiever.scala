@@ -43,8 +43,9 @@ object DaumArchiever {
 
 
         println(murl)
-
-        wfile.write(w(post))
+        val strpost = w(post)
+        println(strpost)
+        wfile.write(strpost)
         wfile.newLine()
         wfile.close()
         Thread.sleep(100)

@@ -17,7 +17,7 @@ object NaverArchiever {
   implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
 
   def main(args: Array[String]) = {
-    val file = if (args.size > 0) args(0) else "data/naverURLS.2014-12-03"
+    val file = if (args.size > 0) args(0) else s"data/naverURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"
     naverFeeds(file)
 
   }

@@ -30,7 +30,7 @@ object TistoryArchiever {
     val f = Files.newBufferedWriter(Paths.get("data/ingredient3"), Charset.forName("utf8"), StandardOpenOption.CREATE)
     i.toSet.filter(x=>x.size>1).toSeq.sorted.foreach{x=>f.write(x);f.newLine()}
     f.close*/
-    tistoryFeeds((Try{args(0)}.getOrElse("data/tistoryURLS.2014-12-03")))
+    tistoryFeeds((Try{args(0)}.getOrElse(s"data/tistoryURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}")))
 //    tistoryParse()
   }
 

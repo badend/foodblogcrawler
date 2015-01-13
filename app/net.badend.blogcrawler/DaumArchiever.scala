@@ -6,6 +6,7 @@ import java.nio.file.{Files, Paths}
 
 import akka.io.IO
 import akka.pattern.ask
+import org.joda.time.format.DateTimeFormat
 import org.json4s.jackson.Serialization._
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -22,8 +23,10 @@ import org.json4s.jackson.Serialization.{read => r, write => w}
 object DaumArchiever {
 
   implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
+
+  val fm = DateTimeFormat.forPattern("yyyy-MM-dd")
   def main(args:Array[String]) ={
-    daumFeeds(Try{args(0)}.getOrElse("data/daumURLS.2014-12-03"))
+    daumFeeds(Try{args(0)}.getOrElse(s"data/daumURLS.${fm.print(System.currentTimeMillis())}"))
 
   }
 

@@ -36,7 +36,7 @@ object TistoryRunner {
     import system.dispatcher
 
     var lastPublished = System.currentTimeMillis()
-    val tistoryURLS = Files.newBufferedWriter(Paths.get(s"data/tistoryURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
+    val tistoryURLS = Files.newBufferedWriter(Paths.get(s"data/tistory/tistoryURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
     var cnt = 0
     while (cnt<10000) {
       var lastp = lastPublished

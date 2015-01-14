@@ -54,7 +54,7 @@ object NaverRunner {
     import system.dispatcher
     var cp = 1
 
-    val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naver/naverURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
+    val naverURLS = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/naver/naverURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
     var cnt = 0
 
     var ncp = 0

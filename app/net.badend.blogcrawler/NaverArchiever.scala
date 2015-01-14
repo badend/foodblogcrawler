@@ -17,7 +17,7 @@ object NaverArchiever {
   implicit val formats = org.json4s.DefaultFormats ++ org.json4s.ext.JodaTimeSerializers.all
 
   def main(args: Array[String]) = {
-    val file = if (args.size > 0) args(0) else s"data/naverURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"
+    val file = if (args.size > 0) args(0) else s"${System.getProperty("user.dir")}/data/naver/naverURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"
     naverFeeds(file)
 
   }
@@ -48,7 +48,7 @@ object NaverArchiever {
           })
 
         if(post.isDefined) {
-          val defaultDir = "data/naver/post"
+          val defaultDir = s"${System.getProperty("user.dir")}/data/naver/post"
           val dir = Paths.get(defaultDir)
           Files.createDirectories(dir)
           val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(url.get, "utf8")}"), Charset.forName("utf8"))

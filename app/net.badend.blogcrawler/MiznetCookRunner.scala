@@ -59,7 +59,7 @@ object MiznetCookRunner {
       ) yield sendReceive(connector)
 
 
-    val miznetcookURLS = Files.newBufferedWriter(Paths.get(s"data/miznetcookURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val miznetcookURLS = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/miznet/miznetcookURLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     var ncp = 0
     while (ncp!=cp) {

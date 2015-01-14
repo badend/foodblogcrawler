@@ -30,7 +30,7 @@ object TistoryArchiever {
     val f = Files.newBufferedWriter(Paths.get("data/ingredient3"), Charset.forName("utf8"), StandardOpenOption.CREATE)
     i.toSet.filter(x=>x.size>1).toSeq.sorted.foreach{x=>f.write(x);f.newLine()}
     f.close*/
-    tistoryFeeds((Try{args(0)}.getOrElse(s"data/tistoryURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}")))
+    tistoryFeeds((Try{args(0)}.getOrElse(s"${System.getProperty("user.dir")}/data/tistory/tistoryURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}")))
 //    tistoryParse()
   }
 
@@ -50,7 +50,7 @@ object TistoryArchiever {
          })
 
        if(post.isDefined) {
-         val defaultDir = "data/tistory/post"
+         val defaultDir = s"${System.getProperty("user.dir")}/data/tistory/post"
          val dir = Paths.get(defaultDir)
          Files.createDirectories(dir)
          var filename = URLEncoder.encode(murl, "utf8")

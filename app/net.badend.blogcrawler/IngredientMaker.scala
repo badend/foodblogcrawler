@@ -27,7 +27,7 @@ object IngredientMaker {
 
   def miznetProvider(file:String) = {
 
-    val fw = Files.newBufferedWriter(Paths.get(s"data/ingredient.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val fw = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/ingredient.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
 
     //val miznet = "data/miznetcookDataS.2014-11-15"
     val mets = scala.io.Source.fromFile(file, "utf8").getLines.toSeq.flatten{

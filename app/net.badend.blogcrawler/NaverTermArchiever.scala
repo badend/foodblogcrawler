@@ -24,9 +24,9 @@ object NaverTermsArchiever {
 
   def ntFeeds() = {
 
-    val ntw = Files.newBufferedWriter(Paths.get(s"data/naverterms.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val ntw = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/naver/naverterms.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
 
-    Source.fromFile("data/naver_terms_URLS.2014-11-15").getLines().foreach{line =>
+    Source.fromFile(s"${System.getProperty("user.dir")}/data/naver_terms_URLS.2014-11-15").getLines().foreach{line =>
       try {
         val nt = ntParse(s"http://m.terms.naver.com$line")
         if(nt!=null) {

@@ -26,7 +26,7 @@ object DaumArchiever {
 
   val fm = DateTimeFormat.forPattern("yyyy-MM-dd")
   def main(args:Array[String]) ={
-    daumFeeds(Try{args(0)}.getOrElse(s"data/daumURLS.${fm.print(System.currentTimeMillis())}"))
+    daumFeeds(Try{args(0)}.getOrElse(s"${System.getProperty("user.dir")}/data/daum/daumURLS.${fm.print(System.currentTimeMillis())}"))
 
   }
 
@@ -36,7 +36,7 @@ object DaumArchiever {
       println(murl)
       val post = Option{try{daumParse(murl)} catch{case e:Exception=>e.printStackTrace()}}
       if(post.isDefined) {
-        val defaultDir = "data/daum/post"
+        val defaultDir = s"${System.getProperty("user.dir")}/data/daum/post"
         val dir = Paths.get(defaultDir)
         Files.createDirectories(dir)
         val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))

@@ -24,7 +24,7 @@ object MiznetCookArchiever {
   def main(args:Array[String]) ={
 
 
-    val miznetcook = Files.newBufferedWriter(Paths.get(s"data/miznetcookDataS_2.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val miznetcook = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/miznet/miznetcookDataS_2.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
 
     (7000 to 70000).toList.foreach({
       n =>

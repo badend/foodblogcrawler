@@ -40,7 +40,7 @@ object NaverTermsRunner {
     import Actors._
     import system.dispatcher
     var cp = 1
-    val naverURLS = Files.newBufferedWriter(Paths.get(s"data/naver_terms_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
+    val naverURLS = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/naver/naver_terms_URLS.${DateTime.now.toIsoDateString}"), Charset.forName("UTF8"))
     var cnt = 0
     while (true) {
       try {

@@ -77,8 +77,8 @@ object NaverArchiever {
         case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case naverme2(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case _ => {
-          println(s"not matched naver mobile url $url")
-          throw new UnsupportedOperationException(s"네이버 주소가 첨보는건데요? $url")
+          println(s"not matched naver mobile url $rurl")
+          throw new UnsupportedOperationException(s"네이버 주소가 첨보는건데요? $rurl")
         }
       }
 

@@ -30,10 +30,15 @@ object DaumArchiever {
 
   }
 
+  val mblogname = "http://m.blog.daum.net/([^/]+)/([^/?&]+)".r
+
+
+
+
+
   def daumFeeds(file:String) = {
     for (line <- Source.fromFile(file).getLines()) {
       val murl = line.replace("http://blog.daum.net", "http://m.blog.daum.net")
-      println(murl)
       val post = Option{try{daumParse(murl)} catch{case e:Exception=>e.printStackTrace()}}
       if(post.isDefined) {
         val defaultDir = s"${System.getProperty("user.dir")}/data/daum/post"
@@ -61,6 +66,7 @@ object DaumArchiever {
 
     val url = if( !rurl.contains("http://blog.daum.net")) rurl.replace("http://m.blog.daum.net", "http://blog.daum.net") else rurl
 
+    val (bid, cid) = url match{ case mblogname(bid,cid) => (bid,cid) ; case _ => println("no"); (null,null)}
     val jsoup = Jsoup.connect(url).get
 
     import scala.collection.JavaConversions._
@@ -117,6 +123,6 @@ object DaumArchiever {
     new BlogPost(url = url, title = title,
       category = category, date = date,
       ingredient = met.map(x=>x._1).mkString(","), text = recipe,
-      images= imgs, id=username, nickname = blogname, comment_no=comment_no, like=0)
+      images= imgs, id=bid, nickname = username, comment_no=comment_no, like=0)
   }
 }

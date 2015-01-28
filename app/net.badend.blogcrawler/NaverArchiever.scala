@@ -21,7 +21,7 @@ object NaverArchiever {
     naverFeeds(file)
 
   }
-  val naverpc = """http://blog.naver.com/(\w+)\?.*&logNo=(\d+).*""".r
+  val naverpc = """http://blog.naver.com/(\w+)\??.*""".r
   val naverme = """http://(\w+).blog.me/(\d+)""".r
   val naverme2 = """http://m.blog.naver.com/(\w+)/(\d+).*""".r
   def naverFeeds(file: String) = {
@@ -77,8 +77,8 @@ object NaverArchiever {
         case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case naverme2(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
         case _ => {
-          println("not matched naver mobile url")
-          throw new UnsupportedOperationException("네이버 주소가 첨보는건데요?")
+          println(s"not matched naver mobile url $url")
+          throw new UnsupportedOperationException(s"네이버 주소가 첨보는건데요? $url")
         }
       }
 
@@ -102,7 +102,7 @@ object NaverArchiever {
     println(summary)
     println(thumbnail)
     val imgs = for (image <- images) yield {
-      val img_url = image.toString.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>", "")
+      val img_url = image.toString.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>", "") + "w2"
       println(img_url)
 
       img_url

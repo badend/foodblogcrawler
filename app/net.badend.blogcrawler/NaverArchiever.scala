@@ -69,13 +69,12 @@ object NaverArchiever {
     })
   }
   def naverParse(rurl: String) = {
-    var domain:String = null
-    var docid:String = null
 
-    val url:String = rurl match {
-        case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
-        case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
-        case naverme2(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+    val (url, domain, docid) : (String, String, String) = rurl match {
+        case naverpc(domain, docid) =>
+          (s"http://m.blog.naver.com/$domain/$docid", domain, docid)
+        case naverme(domain, docid) => (s"http://m.blog.naver.com/$domain/$docid", domain, docid)
+        case naverme2(domain, docid) => (s"http://m.blog.naver.com/$domain/$docid", domain, docid)
         case _ => {
           println(s"not matched naver mobile url $rurl")
           throw new UnsupportedOperationException(s"네이버 주소가 첨보는건데요? $rurl")
@@ -95,21 +94,15 @@ object NaverArchiever {
     val images = jsoup.select("div.post_ct span._img._inl").toArray
     val recipe = jsoup.select("div.post_ct#viewTypeSelector").text
 
-    println(blogname)
-    println(date)
-    println(username)
-    println(title)
-    println(summary)
-    println(thumbnail)
+
     val imgs = for (image <- images) yield {
       val img_url = image.toString.replace("<span class=\"_img _inl fx\" thumburl=\"", "").replace("\"></span>", "") + "w2"
-      println(img_url)
 
       img_url
     }
     val meterials = IngredientService.ac.find(recipe)
     val met = meterials.groupBy(x=>x.actual).map(x=>(x._1, x._2.head.start)).groupBy(x=>x._2).map(x=>x._2.maxBy(x=>x._1.size)).groupBy(x=>x._1.size + x._2).map(x=>x._2.maxBy(y=>y._1.size))
-    println(met)
+
 
     new BlogPost(url = url, title = title,
       category = category, date = date,

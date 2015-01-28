@@ -30,7 +30,7 @@ object DaumArchiever {
 
   }
 
-  val mblogname = "http://m.blog.daum.net/([^/]+)/([^/?&]+)".r
+  val mblogname = "http://blog.daum.net/([^/]+)/([^/?&]+)".r
 
 
 
@@ -38,16 +38,16 @@ object DaumArchiever {
 
   def daumFeeds(file:String) = {
     for (line <- Source.fromFile(file).getLines()) {
-      val murl = line.replace("http://blog.daum.net", "http://m.blog.daum.net")
-      val post = Option{try{daumParse(murl)} catch{case e:Exception=>e.printStackTrace()}}
+      val url = line.replace("http://m.blog.daum.net", "http://blog.daum.net")
+      val post = Option{try{daumParse(url)} catch{case e:Exception=>e.printStackTrace()}}
       if(post.isDefined) {
         val defaultDir = s"${System.getProperty("user.dir")}/data/daum/post"
         val dir = Paths.get(defaultDir)
         Files.createDirectories(dir)
-        val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(murl, "utf8")}"), Charset.forName("utf8"))
+        val wfile = Files.newBufferedWriter(Paths.get(s"$defaultDir/${URLEncoder.encode(url, "utf8")}"), Charset.forName("utf8"))
 
 
-        println(murl)
+        println(url)
         val strpost = w(post)
         println(strpost)
         wfile.write(strpost)
@@ -66,7 +66,7 @@ object DaumArchiever {
 
     val url = if( !rurl.contains("http://blog.daum.net")) rurl.replace("http://m.blog.daum.net", "http://blog.daum.net") else rurl
 
-    val (bid, cid) = url match{ case mblogname(bid,cid) => (bid,cid) ; case _ => println("no"); (null,null)}
+    val (bid, cid) = url match{ case mblogname(bid,cid) => (bid,cid) ; case _ => println(s"no $url"); (null,null)}
     val jsoup = Jsoup.connect(url).get
 
     import scala.collection.JavaConversions._

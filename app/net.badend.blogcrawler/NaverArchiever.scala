@@ -92,7 +92,7 @@ object NaverArchiever {
     val summary = jsoup.select("meta._og_tag._description").attr("content")
     val thumbnail = jsoup.select("meta._og_tag._image").attr("content")
     val images = jsoup.select("div.post_ct span._img._inl").toArray
-    val recipe = jsoup.select("div.post_ct#viewTypeSelector").text
+    val recipe = jsoup.select("div.post_ct#viewTypeSelector").outerHtml()
 
 
     val imgs = for (image <- images) yield {

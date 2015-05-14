@@ -1,7 +1,8 @@
 package net.badend.blogcrawler
 
 
-import java.net.URL
+import java.io.{InputStreamReader, OutputStreamWriter}
+import java.net.{HttpURLConnection, URL}
 import java.nio.charset.Charset
 import java.nio.file.{Paths, Files}
 import java.util.concurrent.TimeUnit
@@ -34,6 +35,10 @@ object TistoryRunner {
   def tistoryProcess = {
     import Actors._
     import system.dispatcher
+    import org.json4s.jackson.Serialization.{read => r, write => w}
+
+    implicit val default = NaverArchiever.formats
+
 
     var lastPublished = System.currentTimeMillis()
     val tistoryURLS = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/tistory/tistoryURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
@@ -54,10 +59,47 @@ object TistoryRunner {
             lastPublished = lastPublished - 10000000
           }
           parsedData._2.foreach(x => {
+
+            try {
+
+              val a: BlogPost = TistoryArchiever.tistoryParse(x)
+              if(a.text.length>0) {
+                val url = new URL("http://gourmetmarket.co/api/recipe/insert")
+                val json = w(a)
+                val con = url.openConnection().asInstanceOf[HttpURLConnection]
+
+
+
+                println(json)
+                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+                con.setRequestProperty("Content-Length", json.length.toString)
+
+                con.setRequestMethod("POST")
+                con.setDoInput(true)
+                con.setDoOutput(true)
+                con.connect()
+                val os = con.getOutputStream()
+                val bs = new OutputStreamWriter(os)
+
+                bs.write(json)
+                bs.flush()
+                bs.close()
+                os.close()
+                val is = new InputStreamReader(con.getInputStream)
+
+                scala.io.Source.fromInputStream(con.getInputStream)(Charset.forName("UTF8")).getLines().foreach(println _)
+
+                is.close()
+              }
+            }catch{
+              case e:Exception => e.printStackTrace()
+            }
+            cnt = cnt + 1
+          })/*.foreach(x => {
             tistoryURLS.write(x)
             tistoryURLS.newLine()
             cnt = cnt + 1
-          })
+          })*/
         } else {
           println("last is null")
           lastPublished = lastPublished - 10000000

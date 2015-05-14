@@ -21,15 +21,26 @@ object NaverArchiever {
     naverFeeds(file)
 
   }
-  val naverpc = """http://blog.naver.com/(\w+)\??.*""".r
+  val naverpc = """http://blog.naver.com/(\w+)/([^\?&/]+).*""".r
+  val naverp = """http://blog.naver.com/(\w+)\?.*?logNo=([^&=]+).+""".r
   val naverme = """http://(\w+).blog.me/(\d+)""".r
   val naverme2 = """http://m.blog.naver.com/(\w+)/(\d+).*""".r
   def naverFeeds(file: String) = {
     val murl = for (line <- Source.fromFile(file).getLines()) yield {
       Option(line match {
-        case naverpc(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
-        case naverme(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
-        case naverme2(domain, docid) => s"http://m.blog.naver.com/$domain/$docid"
+
+        case naverp(domain, docid) =>
+          val docid2 = docid.replaceAll("/","")
+          s"http://m.blog.naver.com/$domain/$docid2"
+        case naverpc(domain, docid) =>
+          val docid2 = docid.replaceAll("/","")
+          s"http://m.blog.naver.com/$domain/$docid2"
+        case naverme(domain, docid) =>
+          val docid2 = docid.replaceAll("/","")
+          s"http://m.blog.naver.com/$domain/$docid2"
+        case naverme2(domain, docid) =>
+          val docid2 = docid.replaceAll("/","")
+          s"http://m.blog.naver.com/$domain/$docid2"
         case _ => {
           println(line)
           println("not matched naver mobile url")
@@ -71,8 +82,12 @@ object NaverArchiever {
   def naverParse(rurl: String) = {
 
     val (url, domain, docid) : (String, String, String) = rurl match {
-        case naverpc(domain, docid) =>
-          (s"http://m.blog.naver.com/$domain/$docid", domain, docid)
+      case naverp(domain, docid) =>
+        val docid2 = docid.replaceAll("/","")
+        (s"http://m.blog.naver.com/$domain/$docid2", domain, docid)
+      case naverpc(domain, docid) =>
+        val docid2 = docid.replaceAll("/","")
+          (s"http://m.blog.naver.com/$domain/$docid2", domain, docid2)
         case naverme(domain, docid) => (s"http://m.blog.naver.com/$domain/$docid", domain, docid)
         case naverme2(domain, docid) => (s"http://m.blog.naver.com/$domain/$docid", domain, docid)
         case _ => {
@@ -93,6 +108,7 @@ object NaverArchiever {
     val thumbnail = jsoup.select("meta._og_tag._image").attr("content")
     val images = jsoup.select("div.post_ct span._img._inl").toArray
     val recipe = jsoup.select("div.post_ct#viewTypeSelector").outerHtml()
+
 
 
     val imgs = for (image <- images) yield {

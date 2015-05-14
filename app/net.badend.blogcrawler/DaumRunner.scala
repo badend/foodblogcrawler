@@ -1,8 +1,11 @@
 package net.badend.blogcrawler
 
+import java.io.{InputStreamReader, OutputStreamWriter}
+import java.net.{HttpURLConnection, URL}
 import java.nio.charset.Charset
 import java.nio.file.{Paths, Files}
 
+import org.json4s.jackson.Serialization._
 import org.jsoup.Jsoup
 
 import scala.util.{Failure, Success}
@@ -39,11 +42,13 @@ object DaumRunner {
 
   }
   def daumProcess = {
-    import Actors._
-    import system.dispatcher
     var cp = 1
 
+    import org.json4s.jackson.Serialization.{read => r, write => w}
 
+    implicit val default = NaverArchiever.formats
+
+    import Actors._
     val daumURLS = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/daum/daumURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
     var ncp = -1
     var cnt = 0
@@ -56,15 +61,51 @@ object DaumRunner {
       println(url)
       val request = scala.io.Source.fromURL(url).mkString
       daumParse(request).foreach(x => {
+
+        try {
+          val a: BlogPost = DaumArchiever.daumParse(x)
+          if(a.text.length>0) {
+            val url = new URL("http://gourmetmarket.co/api/recipe/insert")
+            val json = w(a)
+            val con = url.openConnection().asInstanceOf[HttpURLConnection]
+
+
+
+            println(json)
+            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+            con.setRequestProperty("Content-Length", json.length.toString)
+
+            con.setRequestMethod("POST")
+            con.setDoInput(true)
+            con.setDoOutput(true)
+            con.connect()
+            val os = con.getOutputStream()
+            val bs = new OutputStreamWriter(os)
+
+            bs.write(json)
+            bs.flush()
+            bs.close()
+            os.close()
+            val is = new InputStreamReader(con.getInputStream)
+
+            scala.io.Source.fromInputStream(con.getInputStream)(Charset.forName("UTF8")).getLines().foreach(println _)
+
+            is.close()
+          }
+        }catch{
+          case e:Exception => e.printStackTrace()
+        }
+        cnt = cnt + 1
+      })/*.foreach(x => {
         daumURLS.write(x)
         daumURLS.newLine()
         println(x)
         cnt = cnt + 1
 
-      })
+      })*/
       cp = cp + 1
 
-      daumURLS.flush()
+      //daumURLS.flush()
 
 
     }

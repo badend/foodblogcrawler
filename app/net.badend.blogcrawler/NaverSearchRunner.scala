@@ -14,7 +14,7 @@ import scala.util.{Failure, Success}
 import scala.xml.XML
 import akka.io.IO
 import akka.pattern.ask
-import spray.can.Http
+
 import spray.http._
 import spray.client.pipelining._
 
@@ -39,6 +39,7 @@ object NaverSearchRunner {
   }
 
   def naverProcessPostSearch() = {
+    import spray.can.Http
     import Actors._
     import system.dispatcher
     var cp = 1

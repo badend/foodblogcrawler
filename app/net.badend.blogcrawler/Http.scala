@@ -608,7 +608,7 @@ object HttpConstants {
 }
 
 /** Default entry point to this library */
-object Http extends BaseHttp
+object Https extends BaseHttp
 
 /**
  * Extends and override this class to setup your own defaults

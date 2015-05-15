@@ -68,7 +68,7 @@ object MiznetCookRunner {
       ncp=cp
 
       val request = Post(MiznetCookCrawler.url, FormData(data))
-      val response: Future[HttpResponse] = pipeline.flatMap(_(request))
+      val response = pipeline.flatMap(_(request))
       response onComplete {
         case Success(s) => {
 

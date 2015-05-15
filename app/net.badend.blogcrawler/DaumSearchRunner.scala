@@ -54,7 +54,7 @@ object DaumSearchRunner {
       val ncp = cp
       println(data)
       val request = Post(DaumSearchCrawler.url, FormData(data))
-      val response: Future[HttpResponse] = pipeline.flatMap(_(request))
+      val response= pipeline.flatMap(_(request))
       response onComplete {
         case Success(s) => {
           daumParseForSearch(s.entity.asString).foreach(x => {

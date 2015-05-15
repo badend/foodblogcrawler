@@ -56,7 +56,7 @@ object NaverSearchRunner {
       val ncp = cp
       println(data)
       val request = Post(NaverSearchCrawler.url, FormData(data))
-      val response: Future[HttpResponse] = pipeline.flatMap(_(request))
+      val response = pipeline.flatMap(_(request))
       response onComplete {
         case Success(s) => {
           naverParseForSearch(s.entity.asString).foreach(x => {

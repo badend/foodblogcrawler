@@ -17,6 +17,7 @@ import spray.http._
  */
 object DaumRunner {
 
+  val banedid = Set("nj0090","kshi302","daegupc","huimangcho","affa987","amdsusan","huimangcho","don3400","nj0090","teenz2","gusnl777","dajon","jangchief","rmwldi178","huimangcho","nanherb","jupak21","corngrill","don3400","hrs1350","psh2084","rmwldi178","hskbd","dogood4")
   def main(args:Array[String]) ={
     daumProcess
   }
@@ -64,7 +65,7 @@ object DaumRunner {
 
         try {
           val a: BlogPost = DaumArchiever.daumParse(x)
-          if(a.text.length>0) {
+          if(a.text.length>0 && !banedid.contains(a.id)) {
             val url = new URL("http://gourmetmarket.co/api/recipe/insert")
             val json = w(a)
             val con = url.openConnection().asInstanceOf[HttpURLConnection]

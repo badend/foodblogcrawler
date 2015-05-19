@@ -27,6 +27,8 @@ import spray.client.pipelining._
  * Created by badend on 10/30/14.
  */
 object TistoryRunner {
+  
+  val banedid = Set("dust8864","hagane372","pjsjjanglove","achimjuice","cococo9","ecow","chefstory","ansths","yourlifeplus","getitbyyourhands","ktj-soft","hnewskr","kmkcassis","yourlifeplus","hwarang18se","sart","koreano12324","kblife-story","matzzangs","skhynix","mongmmmomnhg","kmkcassis","banana302","hiroo22","theurgistk","itsmore","livenjoy","onmams","dkfhaldhkd","monster21","dlrmawoek","livenjoy","softroad","banana302","springsunray","worldknowledge3","sejinfng","ccukptok","mari0928","cadceus","yeohwawon","happymonster","roskfldi123","moonstar8","dlfemddlek0001","koreano12324","ksk34g","wingofwolf","nongmin","wbcook","blueoreo","wbcook","madforchoco","dust8864","totalaudio","happymonster","dlfemddlek0001","gabrielle","getitbyyourhands","gabrielle","yeoul012","sart","chinaaz","crw100","jcrown","truereview","rure","totoro1u","hwarang18se","beekeeping","greenhrp","ys06","ramentory","bih4","duqrlwjrdls88","moonstar8","magicnara","happymonster","lotteallsafe","hiroo22","senasama","onmams","greenhrp","mari0928","vampy","paranwater","morocossi","timeeasy","illusion7","dongho1022","lookatmein","kskig1","lara","magicnara","msk8264","flpan","yoon-talk","jch1980","fdfdfag4","eirene88world")
 
   def main(args:Array[String]) ={
     tistoryProcess
@@ -63,7 +65,7 @@ object TistoryRunner {
             try {
 
               val a: BlogPost = TistoryArchiever.tistoryParse(x)
-              if(a.text.length>0) {
+              if(a.text.length>0 && !banedid.contains(a.id)) {
                 val url = new URL("http://gourmetmarket.co/api/recipe/insert")
                 val json = w(a)
                 val con = url.openConnection().asInstanceOf[HttpURLConnection]

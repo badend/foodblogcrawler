@@ -13,6 +13,7 @@ import org.jsoup.Jsoup
 import scala.concurrent.Future
 
 object NaverRunner {
+  val banedid = Set("my_chef","nagaja27","silver877","anyoung55","jylovesj1215","yheo85","sejinfng","wwf256")
 
   def main(args:Array[String]) ={
     naverProcess
@@ -75,7 +76,7 @@ object NaverRunner {
           try {
 
             val a: BlogPost = NaverArchiever.naverParse(x)
-            if(a.text.length>0) {
+            if(a.text.length>0 && !banedid.contains(a.id)) {
               val url = new URL("http://gourmetmarket.co/api/recipe/insert")
               val json = w(a)
               val con = url.openConnection().asInstanceOf[HttpURLConnection]

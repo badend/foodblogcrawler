@@ -8,6 +8,7 @@ import java.nio.file.{Paths, Files}
 import org.json4s.jackson.Serialization._
 import org.jsoup.Jsoup
 
+import scala.io.Codec
 import scala.util.{Failure, Success}
 import spray.http._
 
@@ -53,14 +54,14 @@ object DaumRunner {
     val daumURLS = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/daum/daumURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
     var ncp = -1
     var cnt = 0
-    while (ncp!=cnt) {
+    while (ncp!=cnt || cp < 1000) {
 
       val data = DaumCrawler.param(page_no=cp).map(x=>s"${x._1}=${x._2}").mkString("&")
       ncp=cnt
       println(data)
       val url = s"${DaumCrawler.url}?$data"
       println(url)
-      val request = scala.io.Source.fromURL(url).mkString
+      val request = scala.io.Source.fromURL(url)(Codec.UTF8).mkString
       daumParse(request).foreach(x => {
 
         try {
@@ -72,7 +73,6 @@ object DaumRunner {
 
 
 
-            println(json)
             con.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
             con.setRequestProperty("Content-Length", json.length.toString)
 
@@ -89,7 +89,7 @@ object DaumRunner {
             os.close()
             val is = new InputStreamReader(con.getInputStream)
 
-            scala.io.Source.fromInputStream(con.getInputStream)(Charset.forName("UTF8")).getLines().foreach(println _)
+            scala.io.Source.fromInputStream(con.getInputStream)(Charset.forName("UTF8")).getLines().foreach(x=> println(x.take(10)))
 
             is.close()
           }

@@ -12,6 +12,7 @@ import com.alibaba.fastjson.{JSONObject, JSON}
 import org.jsoup.Jsoup
 
 import scala.concurrent.Future
+import scala.io.Codec
 
 import scala.util.{Failure, Success}
 import scala.xml.XML
@@ -45,13 +46,13 @@ object TistoryRunner {
     var lastPublished = System.currentTimeMillis()
     val tistoryURLS = Files.newBufferedWriter(Paths.get(s"${System.getProperty("user.dir")}/data/tistory/tistoryURLS.${DaumArchiever.fm.print(System.currentTimeMillis())}"), Charset.forName("UTF8"))
     var cnt = 0
-    while (cnt<10000) {
+    while (cnt<1000) {
       var lastp = lastPublished
       val data = TistoryCrawler.param(lastPublished = lastPublished, first = false)
-      println(data)
+
       val tistoryurl = s"${TistoryCrawler.url}?${data.map(x => x._1 + "=" + x._2).mkString("&")}"
       try {
-        val s = scala.io.Source.fromURL(new URL(tistoryurl))(Charset.forName("UTF8")).mkString
+        val s = scala.io.Source.fromURL(new URL(tistoryurl))(Codec.UTF8).mkString
         val parsedData = tistoryJson(s)
         if (parsedData != null) {
           if (parsedData._1 != null) {
@@ -72,7 +73,7 @@ object TistoryRunner {
 
 
 
-                println(json)
+
                 con.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
                 con.setRequestProperty("Content-Length", json.length.toString)
 
@@ -89,7 +90,7 @@ object TistoryRunner {
                 os.close()
                 val is = new InputStreamReader(con.getInputStream)
 
-                scala.io.Source.fromInputStream(con.getInputStream)(Charset.forName("UTF8")).getLines().foreach(println _)
+                scala.io.Source.fromInputStream(con.getInputStream)(Codec.UTF8).getLines().foreach(println _)
 
                 is.close()
               }

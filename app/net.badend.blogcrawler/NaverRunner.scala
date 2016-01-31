@@ -70,7 +70,7 @@ object NaverRunner {
       val naverurl = s"${NaverCrawler.url}?${data.map(x => x._1 + "=" + x._2).mkString("&")}"
       println(naverurl)
       try {
-        val s = scala.io.Source.fromURL(new URL(naverurl))(Charset.forName("UTF8")).mkString
+        val s = scala.io.Source.fromURL(new URL(naverurl))(Codec.UTF8).mkString
         naverParse(s).foreach(x => {
 
           try {
@@ -92,7 +92,7 @@ object NaverRunner {
               con.setDoOutput(true)
               con.connect()
               val os = con.getOutputStream()
-              val bs = new OutputStreamWriter(os)
+              val bs = new OutputStreamWriter(os, "UTF8")
 
               bs.write(json)
               bs.flush()

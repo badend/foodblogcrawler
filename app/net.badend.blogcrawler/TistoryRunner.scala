@@ -82,7 +82,7 @@ object TistoryRunner {
                 con.setDoOutput(true)
                 con.connect()
                 val os = con.getOutputStream()
-                val bs = new OutputStreamWriter(os)
+                val bs = new OutputStreamWriter(os, "UTF8")
 
                 bs.write(json)
                 bs.flush()

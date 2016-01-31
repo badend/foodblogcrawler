@@ -71,9 +71,6 @@ object TistoryRunner {
                 val json = w(a)
                 val con = url.openConnection().asInstanceOf[HttpURLConnection]
 
-
-
-
                 con.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
                 con.setRequestProperty("Content-Length", json.length.toString)
 

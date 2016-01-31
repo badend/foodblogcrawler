@@ -12,7 +12,6 @@ import spray.http._
 import scala.concurrent.Future
 import scala.util.{Random, Failure, Success}
 import scala.io._
-import scala.util.regexp._
 
 import org.json4s._
 import org.json4s.jackson.Serialization

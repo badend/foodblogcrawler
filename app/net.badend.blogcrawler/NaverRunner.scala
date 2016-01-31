@@ -100,7 +100,7 @@ object NaverRunner {
               os.close()
               val is = new InputStreamReader(con.getInputStream)
 
-              scala.io.Source.fromInputStream(con.getInputStream)(Charset.forName("UTF8")).getLines().foreach(println _)
+              scala.io.Source.fromInputStream(con.getInputStream)(Charset.forName("UTF8")).getLines().foreach(x=>println(x.take(10)))
 
               is.close()
               con.disconnect()
@@ -124,6 +124,7 @@ object NaverRunner {
 
 
     }
+    System.exit(1)
   }
 
 }

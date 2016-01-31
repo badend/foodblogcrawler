@@ -79,7 +79,7 @@ object TistoryArchiever {
 
     val url =   if( !rurl.contains("tistory.com/m")) rurl.replace("tistory.com/", "tistory.com/m/post/") else rurl
     val id = url.take(url.indexOf("tistory.com") - 1).replace("http://", "")
-    val html = Source.fromURL(url).mkString
+    val html = Source.fromURL(url)(Codec.UTF8).mkString
     //println(html)
     val jsoup = Jsoup.parse(html)
     val blogname = jsoup.select("div#header h1 a#blogTitle").text

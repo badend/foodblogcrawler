@@ -1,3 +1,5 @@
+import _root_.sbtassembly.AssemblyPlugin.autoImport._
+import _root_.sbtassembly.PathList
 import sbt.Keys._
 import sbt._
 import com.github.play2war.plugin._
@@ -20,6 +22,29 @@ aggregate in runMain := true
 val sprayV = "1.3.1"
 
 val hadoopversion = "2.0.0-cdh4.6.0"
+
+assemblyMergeStrategy in assembly :=  {
+  case x if Assembly.isConfigFile(x) =>
+    MergeStrategy.concat
+  case PathList(ps @ _*) if Assembly.isReadme(ps.last) || Assembly.isLicenseFile(ps.last) =>
+    MergeStrategy.rename
+  case PathList("META-INF", xs @ _*) =>
+    (xs map {_.toLowerCase}) match {
+      case ("manifest.mf" :: Nil) | ("index.list" :: Nil) | ("dependencies" :: Nil) =>
+        MergeStrategy.discard
+      case ps @ (x :: xs) if ps.last.endsWith(".sf") || ps.last.endsWith(".dsa") =>
+        MergeStrategy.discard
+      case "plexus" :: xs =>
+        MergeStrategy.discard
+      case "services" :: xs =>
+        MergeStrategy.filterDistinctLines
+      case ("spring.schemas" :: Nil) | ("spring.handlers" :: Nil) =>
+        MergeStrategy.filterDistinctLines
+      case _ => MergeStrategy.first
+    }
+  case _ => MergeStrategy.first
+}
+
 
 libraryDependencies ++= Seq(
   "org.scala-lang" %% "scala-pickling" % "0.9.0",
@@ -60,35 +85,8 @@ resolvers ++= Seq(  "Typesafe repository" at "http://repo.typesafe.com/typesafe/
 resolvers += "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository"
 
 
-javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 
 retrieveManaged := true
 
-//publishTo := Some("daum" at "http://maven.daumcorp.com/content/groups/daum-sqt-group/")
-
 publishMavenStyle := true
-
-
-pomExtra := (
-  // <distributionManagement>
-  //        <repository>
-  //                <id>daum</id>
-  //                <name>Daum Repository</name>
-  //                <url>http://maven.daumcorp.com/content/repositories/daum</url>
-  //        </repository>
-  //        <snapshotRepository>
-  //                <id>daum-snapshots</id>
-  //                <name>Daum Snapshot Repository</name>
-  //                <url>http://maven.daumcorp.com/content/repositories/daum-snapshots</url>
-  //        </snapshotRepository>
-  //    </distributionManagement>
-  <scm>
-    <url>http://digit.daumcorp.com/badend/arfapi</url>
-    <connection>scm:git:git@dgit.co:badend/arfapi.git</connection>
-  </scm>
-    <developers>
-      <developer>
-        <id>badend</id>
-        <name>badend</name>
-      </developer>
-    </developers>)

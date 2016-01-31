@@ -14,7 +14,6 @@ import spray.http._
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
 import scala.io._
-import scala.util.regexp._
 
 object NaverTermsArchiever {
 

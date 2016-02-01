@@ -13,9 +13,9 @@ version := "0.1.0-SNAPSHOT"
 
 organization := "net.badend"
 
-scalaVersion := "2.11.4"
+scalaVersion := "2.10.6"
 
-crossScalaVersions := Seq("2.10.4", "2.11.4")
+crossScalaVersions := Seq("2.10.6", "2.11.4")
 
 aggregate in runMain := true
 
